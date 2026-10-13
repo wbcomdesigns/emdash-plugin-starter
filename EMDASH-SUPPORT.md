@@ -83,6 +83,7 @@ Live sites run EmDash 1.1. Anything here may be missing there, so each plugin st
 | A plugin intercepting requests | No hook for it | Site middleware from the kit. Decides Maintenance Mode |
 | A file input on a plugin admin page | Block Kit has none | Download: a raw plugin route returns the file. Upload: the owner adds the file to the media library and picks it with the media picker. **Earlier text here said a download was not possible. That was wrong** |
 | A custom field on a category, such as an icon | A category has a label, a slug and a description only | Keep the extra value in plugin storage keyed by the category |
+| The visitor's location ("near me") | EmDash core sends `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()` on every page, so the browser refuses. Found in Listora #51 | Search by typed city. Dropped |
 | A member id from the request, or a user on a public route | By design | Member routes are private |
 | Atomic rate limits without care | Plain read-then-write races | `compareAndSet` |
 

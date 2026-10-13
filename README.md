@@ -26,7 +26,7 @@ Each plugin repo carries everything an agent needs, with no shared conversation:
 | `AGENTS.md` | The hard rules |
 | `CONTRIBUTING.md` | Build rules, the gate before a release, the publish steps |
 | `docs/qa/QA_CHECKLIST.md` | The cases by role that a release must pass |
-| GitHub issues, milestone `0.1.0` | The cards: build, UX ready when, function ready when, QA cases |
+| GitHub issues, milestone `0.1.0` | The cards: build, UX ready when, function ready when, QA cases. No Basecamp for any EmDash plugin |
 
 ## How to assign the work
 
