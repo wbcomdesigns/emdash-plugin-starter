@@ -12,7 +12,7 @@ This repository is two things:
 | Listora (directory) | `emdash-listora` | 4321 | Listora | Shipped. 0.3.1 on the registry |
 | Reviews and Ratings | `emdash-reviews` | 4331 | Wbcom mark for now | Engine, admin and 13 tests written. Kit written, never rendered |
 | Polls | `emdash-polls` | 4332 | WB Polls | Starter only |
-| KnowX Knowledge Base | `emdash-knowx` | 4333 | KnowX (logo needed) | Starter only |
+| KnowX Knowledge Base | `emdash-knowx` | 4333 | KnowX | Starter only |
 | Maintenance Mode | `emdash-maintenance` | 4334 | Wbcom mark for now | Starter only. First card is an investigation |
 | Roadmap and Feature Voting | `emdash-roadmap` | 4335 | Product Roadmap | Starter only |
 
@@ -58,7 +58,6 @@ Each plugin repo carries everything an agent needs, with no shared conversation:
 - **Publisher name.** Everything publishes as `@vapvarun.bsky.social/<slug>`. Moving to a Wbcom handle later means new package identities. Decide before the second plugin is published.
 - **Decided 2026-10-13:** the site owner chooses who can take part (members only, or anyone) in Reviews, Polls and Roadmap.
 - **Not ready for existing live sites yet.** The findings from Listora apply to all of these: prove each kit on a preview deploy of one site, never on production first. See `emdash-listora` issue #23.
-- **KnowX logo.** No KnowX folder exists under `~/Documents/brand logos/`.
 - **Shared account page.** Each plugin ships a `My ...` component and no account page of its own, so they never collide. A site's account page mounts whichever it has installed. Listora still ships its own `/account/` page and should move to this pattern.
 
 ## Making a new plugin from this starter
