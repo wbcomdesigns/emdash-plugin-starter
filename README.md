@@ -51,6 +51,8 @@ Each plugin repo carries everything an agent needs, with no shared conversation:
 - Kit markup is the same for every visitor, because site pages are cached without regard to cookies.
 - Nothing from an outside host in the kit. Sites only allow scripts and styles from themselves.
 - Every screen has loading, empty and error states, works at 390, and reads in dark mode.
+- **Admin first (owner, 2026-10-13).** EmDash is not member-focused for now. Scope each plugin around what the admin can do and what a visitor sees. Do not add member-side creation, dashboards or approval flows unless the owner asks for them.
+- **Compare with the WordPress plugin before locking a scope.** List its free features, mark each as here, not here, or no equivalent, and put the table in `SCOPE.md`. Free features only; paid ones stay out unless the owner picks one.
 - Everyone installing an EmDash plugin today is a developer, so setup may need one. What the owner and visitors use after setup must still be plain and complete.
 - A registry (sandboxed) install cannot add a block inside article text; a trusted install can (`admin.portableTextBlocks` plus a `componentsEntry`). Each plugin has a "prove the in-text block" task. A registry install can add a panel and actions to the post and page editing screen (`admin.editorPanels`, `admin.editorActions`). First use is `emdash-polls` issue #14.
 - No half-cooked features: if a site owner with no technical help cannot use a thing from start to finish, it is not built or shipped in that form. No typed internal ids, no copy-and-paste boxes.
