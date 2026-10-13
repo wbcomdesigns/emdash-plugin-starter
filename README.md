@@ -45,6 +45,8 @@ Each plugin repo carries everything an agent needs, with no shared conversation:
 
 ## Rules every plugin follows
 
+- **Read `EMDASH-SUPPORT.md` first.** It lists what EmDash can do (proven), what its code says it can do (not proven by us) and what it cannot. A task that needs an unproven row proves it on a lab first and stops if the proof fails.
+
 - Free scope only. `SCOPE.md` is the contract.
 - Guests do only what `SCOPE.md` marks public. Member actions use the signed-in EmDash account, never an id from the request.
 - Derived numbers (ratings, vote counts) live in plugin storage, so keeping them right never touches site content.
