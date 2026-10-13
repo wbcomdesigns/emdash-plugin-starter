@@ -46,6 +46,7 @@ Live sites run EmDash 1.1. Anything here may be missing there, so each plugin st
 | Admin pages: tables, forms, menus, toggles, select, text | Block Kit. Tables need `page_action_id` |
 | Structured data on a page | `page:metadata` hook |
 | A card on the EmDash dashboard | `admin.widgets` in the manifest. The admin route receives `{ type: "page_load", page: "widget:<id>" }`. Links use `{ type: "link", target: { kind: "plugin-page", path } }`. Proven in Listora #27 |
+| A long admin table | `next_cursor` on the table draws Load more. The admin then sends `{ type: "block_action", action_id: <page_action_id>, value: { cursor, sort } }`. There is no Next and Previous. Proven in Listora #45 |
 | A settings page in groups, number box with limits | `number_input` with `min` and `max`. A form cannot hold text between fields, so use one small form per group with `context` lines above it. Proven in Listora #27 |
 | Kit pages inside the site's layout, colours and fonts | One layout file, site tokens |
 | Categories and counts on a kit page | `getTermsForEntries`, `getTaxonomyTerms` from `emdash` |
