@@ -130,3 +130,10 @@ These are general plugins for any EmDash site owner, not for our own sites. Our 
 - **A visitor must never be locked out by hosting.** Where EmDash supplies a trusted visitor address, use it (salted hash). Where it does not, fall back to a browser cookie: one entry per browser, written content still waits for approval, and the admin page says the protection is weaker. (The cookie fallback is the build team's reading of "visitors first"; the owner can reverse it.)
 - **Registry install first.** Everything in a plan works from the registry install. A trusted install is an optional extra for blocks inside text, documented as a short second section.
 - **Email is a bonus.** A feature is complete without it. The notice goes out only where the site has mail.
+
+## Proven on 2026-10-14 (Listora 0.5.0)
+
+- **A block inside post text, with a trusted install: works.** A site-local native plugin whose descriptor is `{ id, version, format: "native", entrypoint: "/src/<folder>/plugin.ts", componentsEntry: "/src/<folder>/components.ts" }`, listed under `plugins: []`, puts the block in the editor's `/` menu and draws it on the page. No package needed. Give a `select` field an `initial_value`, or Insert stays off until a field is filled. An article styles its own `img`, `a` and headings, so the block must set those again with enough weight; headings inside the block land in the theme's contents list.
+- **Admin-only (private) plugin routes refuse a plain browser link.** A cookie session must send `X-EmDash-Request: 1`, on GET too, or the answer is 403 `CSRF_REJECTED`. So a file download from a private route needs page script (`fetch` with the header, then a blob link). An admin Block Kit page cannot start one.
+- **A top-level `link` block is invalid.** Put links inside `{ type: "actions", elements: [...] }` or a table cell.
+- **`emdash seed <file> --no-content`** adds a collection, fields and taxonomies to a site that already has content (default `--on-conflict skip`). Local SQLite only as far as we have proven.
