@@ -45,6 +45,8 @@ Live sites run EmDash 1.1. Anything here may be missing there, so each plugin st
 | Send email | `email:send`, `ctx.email.send`. Absent when the site has no mail provider |
 | Admin pages: tables, forms, menus, toggles, select, text | Block Kit. Tables need `page_action_id` |
 | Structured data on a page | `page:metadata` hook |
+| A card on the EmDash dashboard | `admin.widgets` in the manifest. The admin route receives `{ type: "page_load", page: "widget:<id>" }`. Links use `{ type: "link", target: { kind: "plugin-page", path } }`. Proven in Listora #27 |
+| A settings page in groups, number box with limits | `number_input` with `min` and `max`. A form cannot hold text between fields, so use one small form per group with `context` lines above it. Proven in Listora #27 |
 | Kit pages inside the site's layout, colours and fonts | One layout file, site tokens |
 | Categories and counts on a kit page | `getTermsForEntries`, `getTaxonomyTerms` from `emdash` |
 
@@ -64,7 +66,6 @@ Live sites run EmDash 1.1. Anything here may be missing there, so each plugin st
 | EmDash comments on a kit page of a custom collection | Comment functions exist; collection comment settings exist | Roadmap #13 |
 | A real file download from a plugin route | `response: "raw"` with `Content-Disposition`. Documented, not yet tried by us | Listora #46 |
 | Import from a media-library file | `media_picker` plus `media:bytes:read`. Documented, not yet tried by us | Listora #46 |
-| A card on the EmDash dashboard | `admin.widgets`. Documented, not yet tried by us | Every plugin's waiting count |
 | The site's time zone | Site settings have `timezone`. So no plugin setting is needed | Listora #39 |
 
 ## Not possible, so do not plan for it
