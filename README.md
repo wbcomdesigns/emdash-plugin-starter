@@ -85,4 +85,4 @@ Kits built on 2026-10-13: KnowX, WB Polls, Product Roadmap, WB Reviews, WB Maint
 6. File the cards as GitHub issues, each with Build, UX ready when, Function ready when and QA cases.
 7. `npm install --legacy-peer-deps && npm test`, then `./scripts/setup-lab.sh`.
 
-The full process, including what went wrong on the first release, is in the `vapvarun-emdash` skill: `references/plugin-publishing.md`.
+The full process, including what went wrong on the first release, is in the `emdash-plugin-development` skill (`references/build-check-publish.md`). Load that skill before any work here.
