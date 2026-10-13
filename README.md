@@ -51,6 +51,8 @@ Each plugin repo carries everything an agent needs, with no shared conversation:
 - Kit markup is the same for every visitor, because site pages are cached without regard to cookies.
 - Nothing from an outside host in the kit. Sites only allow scripts and styles from themselves.
 - Every screen has loading, empty and error states, works at 390, and reads in dark mode.
+- A plugin of this kind cannot add a block inside article text. It can add a panel and actions to the post and page editing screen (`admin.editorPanels`, `admin.editorActions`). First use is `emdash-polls` issue #14: prove it there before another plugin relies on it.
+- No half-cooked features: if a site owner with no technical help cannot use a thing from start to finish, it is not built or shipped in that form. No typed internal ids, no copy-and-paste boxes.
 - Every release passes the gate in `CONTRIBUTING.md`, including a browser walk as a subscriber-role member.
 
 ## Brand kits
