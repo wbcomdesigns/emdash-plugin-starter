@@ -21,7 +21,8 @@ Each plugin repo carries everything an agent needs, with no shared conversation:
 | File | Answers |
 | --- | --- |
 | `ops/handoff.md` | Where does it stand, what do I do next |
-| `SCOPE.md` | What is in, what is out, the data schema, routes, settings, screens and their states |
+| `SCOPE.md` | How every kind of site owner uses it, decisions made with the owner, what is in and out, the data schema, routes, settings, screens and their states |
+| `PLAN.md` | The order of the 0.1.0 cards, what is parked for 0.2.0, what must be proven before a live site |
 | `AGENTS.md` | The hard rules |
 | `CONTRIBUTING.md` | Build rules, the gate before a release, the publish steps |
 | `docs/qa/QA_CHECKLIST.md` | The cases by role that a release must pass |
@@ -55,6 +56,7 @@ Each plugin repo carries everything an agent needs, with no shared conversation:
 ## Open decisions for the owner
 
 - **Publisher name.** Everything publishes as `@vapvarun.bsky.social/<slug>`. Moving to a Wbcom handle later means new package identities. Decide before the second plugin is published.
+- **Decided 2026-10-13:** the site owner chooses who can take part (members only, or anyone) in Reviews, Polls and Roadmap.
 - **Not ready for existing live sites yet.** The findings from Listora apply to all of these: prove each kit on a preview deploy of one site, never on production first. See `emdash-listora` issue #23.
 - **KnowX logo.** No KnowX folder exists under `~/Documents/brand logos/`.
 - **Shared account page.** Each plugin ships a `My ...` component and no account page of its own, so they never collide. A site's account page mounts whichever it has installed. Listora still ships its own `/account/` page and should move to this pattern.
@@ -63,9 +65,10 @@ Each plugin repo carries everything an agent needs, with no shared conversation:
 
 1. Copy this folder to `~/code/emdash-<slug>`, without `node_modules` and `.git`.
 2. Set `name` and `lab.port` in `package.json`, and `slug`, `name`, `description`, `keywords`, `repo` in `emdash-plugin.jsonc`.
-3. Write `SCOPE.md` before any code: purpose, in scope, out of scope, schema, routes, settings, admin screens, kit files, screens and their states, risks.
-4. Write `docs/qa/QA_CHECKLIST.md` from the scope: guest, member, admin and presentation cases.
-5. File the cards as GitHub issues, each with Build, UX ready when, Function ready when and QA cases.
-6. `npm install --legacy-peer-deps && npm test`, then `./scripts/setup-lab.sh`.
+3. Write `SCOPE.md` before any code, and settle its open questions with the owner one at a time: how each kind of site owner uses it, purpose, in scope, out of scope, schema, routes, settings, admin screens, kit files, screens and their states, risks. Record each answer in its decisions table.
+4. Write `PLAN.md`: the cards in order, what is parked, what must be proven before a live site.
+5. Write `docs/qa/QA_CHECKLIST.md` from the scope: guest, member, admin and presentation cases.
+6. File the cards as GitHub issues, each with Build, UX ready when, Function ready when and QA cases.
+7. `npm install --legacy-peer-deps && npm test`, then `./scripts/setup-lab.sh`.
 
 The full process, including what went wrong on the first release, is in the `vapvarun-emdash` skill: `references/plugin-publishing.md`.
