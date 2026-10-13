@@ -13,7 +13,7 @@ This repository is two things:
 | WB Reviews | `emdash-reviews` | 4331 | WB Reviews | Engine, admin and 13 tests written. Kit written, never rendered |
 | Polls | `emdash-polls` | 4332 | WB Polls | Starter only |
 | KnowX Knowledge Base | `emdash-knowx` | 4333 | KnowX | Starter only |
-| WB Maintenance Mode | `emdash-maintenance` | 4334 | WB Maintenance Mode | Starter only. First card is an investigation |
+| WB Maintenance Mode | `emdash-maintenance` | 4334 | WB Maintenance Mode | **Dropped 2026-10-13.** EmDash cannot intercept requests from a plugin. Repo archived |
 | Roadmap and Feature Voting | `emdash-roadmap` | 4335 | Product Roadmap | Starter only |
 
 Each plugin repo carries everything an agent needs, with no shared conversation:
@@ -41,10 +41,10 @@ Each plugin repo carries everything an agent needs, with no shared conversation:
 2. **Polls**: small, no site content involved.
 3. **Roadmap**: the same member pattern, plus the one case where a member action creates a draft.
 4. **KnowX**: the largest kit (four pages) and public writes from guests.
-5. **Maintenance Mode**: start its investigation card early, because the answer decides the design.
 
 ## Rules every plugin follows
 
+- **Not possible means dropped (owner, 2026-10-13).** If EmDash cannot support an idea, drop it and say so. Do not build a workaround and do not loop on it.
 - **Read `EMDASH-SUPPORT.md` first.** It lists what EmDash can do (proven), what its code says it can do (not proven by us) and what it cannot. A task that needs an unproven row proves it on a lab first and stops if the proof fails.
 
 - Free scope only. `SCOPE.md` is the contract.
