@@ -1,0 +1,71 @@
+# Wbcom EmDash plugins: plan and starter
+
+This repository is two things:
+
+1. **The plan** for the Wbcom utility plugins on EmDash: which plugins, in what order, who can work on what.
+2. **The starter** every plugin repo is made from, and the home of the two files all plugin kits share.
+
+## The plugins
+
+| Plugin | Repo | Lab port | Brand | State on 2026-10-13 |
+| --- | --- | --- | --- | --- |
+| Listora (directory) | `emdash-listora` | 4321 | Listora | Shipped. 0.3.1 on the registry |
+| Reviews and Ratings | `emdash-reviews` | 4331 | Wbcom mark for now | Engine, admin and 13 tests written. Kit written, never rendered |
+| Polls | `emdash-polls` | 4332 | WB Polls | Starter only |
+| KnowX Knowledge Base | `emdash-knowx` | 4333 | KnowX (logo needed) | Starter only |
+| Maintenance Mode | `emdash-maintenance` | 4334 | Wbcom mark for now | Starter only. First card is an investigation |
+| Roadmap and Feature Voting | `emdash-roadmap` | 4335 | Product Roadmap | Starter only |
+
+Each plugin repo carries everything an agent needs, with no shared conversation:
+
+| File | Answers |
+| --- | --- |
+| `ops/handoff.md` | Where does it stand, what do I do next |
+| `SCOPE.md` | What is in, what is out, the data schema, routes, settings, screens and their states |
+| `AGENTS.md` | The hard rules |
+| `CONTRIBUTING.md` | Build rules, the gate before a release, the publish steps |
+| `docs/qa/QA_CHECKLIST.md` | The cases by role that a release must pass |
+| GitHub issues, milestone `0.1.0` | The cards: build, UX ready when, function ready when, QA cases |
+
+## How to assign the work
+
+- **One agent per plugin.** The repos, lab sites and ports are separate, so the five can run at the same time on one machine.
+- Tell the agent one thing: "Read `ops/handoff.md` in `~/code/emdash-<slug>` and work the cards in order."
+- An agent stops at a passing gate. It never publishes. A registry release cannot be changed.
+- An agent does not edit `site-kit/lib/wbcom-kit.ts` or `site-kit/styles/wbcom-base.css` in its own repo. A change to either is made here first and then copied to every plugin, by whoever owns this repo.
+
+## Suggested order if you cannot run all five at once
+
+1. **Reviews**: closest to done, and it proves the shared kit and the lab scripts for everyone else.
+2. **Polls**: small, no site content involved.
+3. **Roadmap**: the same member pattern, plus the one case where a member action creates a draft.
+4. **KnowX**: the largest kit (four pages) and public writes from guests.
+5. **Maintenance Mode**: start its investigation card early, because the answer decides the design.
+
+## Rules every plugin follows
+
+- Free scope only. `SCOPE.md` is the contract.
+- Guests do only what `SCOPE.md` marks public. Member actions use the signed-in EmDash account, never an id from the request.
+- Derived numbers (ratings, vote counts) live in plugin storage, so keeping them right never touches site content.
+- Kit markup is the same for every visitor, because site pages are cached without regard to cookies.
+- Nothing from an outside host in the kit. Sites only allow scripts and styles from themselves.
+- Every screen has loading, empty and error states, works at 390, and reads in dark mode.
+- Every release passes the gate in `CONTRIBUTING.md`, including a browser walk as a subscriber-role member.
+
+## Open decisions for the owner
+
+- **Publisher name.** Everything publishes as `@vapvarun.bsky.social/<slug>`. Moving to a Wbcom handle later means new package identities. Decide before the second plugin is published.
+- **Not ready for existing live sites yet.** The findings from Listora apply to all of these: prove each kit on a preview deploy of one site, never on production first. See `emdash-listora` issue #23.
+- **KnowX logo.** No KnowX folder exists under `~/Documents/brand logos/`.
+- **Shared account page.** Each plugin ships a `My ...` component and no account page of its own, so they never collide. A site's account page mounts whichever it has installed. Listora still ships its own `/account/` page and should move to this pattern.
+
+## Making a new plugin from this starter
+
+1. Copy this folder to `~/code/emdash-<slug>`, without `node_modules` and `.git`.
+2. Set `name` and `lab.port` in `package.json`, and `slug`, `name`, `description`, `keywords`, `repo` in `emdash-plugin.jsonc`.
+3. Write `SCOPE.md` before any code: purpose, in scope, out of scope, schema, routes, settings, admin screens, kit files, screens and their states, risks.
+4. Write `docs/qa/QA_CHECKLIST.md` from the scope: guest, member, admin and presentation cases.
+5. File the cards as GitHub issues, each with Build, UX ready when, Function ready when and QA cases.
+6. `npm install --legacy-peer-deps && npm test`, then `./scripts/setup-lab.sh`.
+
+The full process, including what went wrong on the first release, is in the `vapvarun-emdash` skill: `references/plugin-publishing.md`.

@@ -1,0 +1,20 @@
+{
+	"$schema": "./node_modules/@emdash-cms/plugin-cli/schemas/emdash-plugin.schema.json",
+
+	"slug": "starter",
+	"name": "Wbcom Plugin Starter",
+	"publisher": "did:plc:2o6axbe264shvyedyhycyhya",
+
+	"license": "MIT",
+	"repo": "https://github.com/wbcomdesigns/emdash-plugin-starter",
+	"author": { "name": "Wbcom Designs", "url": "https://wbcomdesigns.com", "email": "security@wbcomdesigns.com" },
+	"security": { "email": "security@wbcomdesigns.com" },
+	"description": "Starting point for Wbcom EmDash plugins.",
+
+	"capabilities": [],
+	"allowedHosts": [],
+	"storage": {},
+	"admin": {
+		"pages": [{ "path": "/home", "label": "Starter", "icon": "sparkle" }]
+	}
+}
