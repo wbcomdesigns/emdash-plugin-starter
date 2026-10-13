@@ -1,5 +1,34 @@
 # What EmDash supports: check this before building
 
+**Read EmDash's own guides first.** Every fresh EmDash site ships them in `.agents/skills/`: `building-emdash-site` (what the CMS gives every site) and `creating-plugins` (what a plugin can do, with `references/sandbox-boundaries.md` for the limits). Source: https://github.com/emdash-cms/emdash, docs: https://docs.emdashcms.com. Those guides beat this file and beat anything remembered. This section was written from them on 2026-10-13 after the owner pointed out the plans were being scoped without looking at what the CMS already offers.
+
+## What EmDash core gives every site (do not rebuild these)
+
+| Built in | What it is | What that means for our plugins |
+| --- | --- | --- |
+| Site search | `LiveSearch` component (instant results), `search()`, a Ctrl or Cmd + K pattern | KnowX uses it. It does not build its own search box or index |
+| Comments | `Comments` and `CommentForm` components, threaded, per collection, with moderation in admin | Roadmap discussion uses it. No comment system of our own, anywhere |
+| Widget areas | Named areas (sidebar, footer) the owner fills in admin: search, categories, tags, recent posts, rich text | Check whether a plugin can offer a widget before building a "place it in the sidebar" feature |
+| Menus, site settings | Title, tagline, logo, social links, **time zone**, date format | Use the site's time zone and date format. No plugin setting for either |
+| Categories and tags | Hierarchical taxonomies with counts, `getEntriesByTerm`, filter in content queries | Listora, Roadmap and KnowX categories are EmDash taxonomies |
+| SEO data | Title, description, canonical per entry; plugins add structured data through `page:metadata` | No SEO fields of our own |
+| Bylines, redirects, revisions, drafts, scheduling, preview | Core content features | Roadmap merge uses redirects |
+| Official plugins | Forms, Embeds, Color picker field, Field kit (lists, grids, tag inputs for json fields), Audit log, Webhook notifier, AI comment moderation, Resend email provider | Docs point owners to Resend for email. Field kit covers list-style fields such as opening hours or a gallery |
+
+## What a registry plugin can add to the admin (from `creating-plugins`)
+
+| Surface | Use it for |
+| --- | --- |
+| Admin pages (Block Kit: tables, forms, tabs, accordion, charts, meters, banners, repeater, media picker, conditional fields, button confirmations) | Queues, settings, reports |
+| **Dashboard widgets** on the EmDash dashboard | "3 reviews waiting", "2 ideas waiting". The owner's alert, with no email needed |
+| **Saved-entry panels and actions** on the post and page editing screen | Polls: attach a poll while editing. Documented for registry plugins |
+| **Field widgets**: a custom field on any collection, storing a json value (text, number, toggle, select, media picker elements) | A "poll" or "rating" field the owner adds to a content type |
+| **Raw routes that return a file** (`response: "raw"`, `pluginResponse()`, `Content-Disposition` allowed) | A real spreadsheet download from the plugin itself |
+| Reading a media file's bytes (`media:bytes:read`, up to 16 MiB) with a media picker | Import a spreadsheet the owner uploaded to the media library, all inside the admin |
+| MCP tools on private routes | Let an AI agent manage polls or listings. Later |
+
+Only a trusted (native) plugin can add a block inside post text, React admin screens, raw page fragments, or Astro render components.
+
 Checked on 2026-10-13 against EmDash 1.2.0 (the version in the labs). Every locked plan depends on rows in this table. A row marked **Not proven** must be proven on a lab site as the first step of the task that needs it. If the proof fails, stop and tell the owner. Do not build around it and do not keep trying variations.
 
 Live sites run EmDash 1.1. Anything here may be missing there, so each plugin states EmDash 1.2 as its minimum and a site is updated first.
@@ -33,7 +62,9 @@ Live sites run EmDash 1.1. Anything here may be missing there, so each plugin st
 | Number box, multi-line text, tick-boxes, tabs, combobox in admin forms | Block Kit `number_input`, `text_input` with `multiline`, `checkbox`, `tab`, `combobox` | Every Settings page |
 | Site search from a kit page | `search()` from `emdash` | KnowX search |
 | EmDash comments on a kit page of a custom collection | Comment functions exist; collection comment settings exist | Roadmap #13 |
-| A kit address that tells an admin from a member and a guest | `Astro.locals.user` carries `role` as a number (50 is admin). Read in the EmDash source; not yet tried on a kit address | Listora #46 |
+| A real file download from a plugin route | `response: "raw"` with `Content-Disposition`. Documented, not yet tried by us | Listora #46 |
+| Import from a media-library file | `media_picker` plus `media:bytes:read`. Documented, not yet tried by us | Listora #46 |
+| A card on the EmDash dashboard | `admin.widgets`. Documented, not yet tried by us | Every plugin's waiting count |
 | The site's time zone | Site settings have `timezone`. So no plugin setting is needed | Listora #39 |
 
 ## Not possible, so do not plan for it
@@ -43,7 +74,7 @@ Live sites run EmDash 1.1. Anything here may be missing there, so each plugin st
 | A block inside post text from a registry install | Sandboxed plugins cannot | Editing-screen panel and slots; block with a trusted install |
 | A plugin adding its own pages or styles | Sandboxed plugins cannot | The site kit |
 | A plugin intercepting requests | No hook for it | Site middleware from the kit. Decides Maintenance Mode |
-| A file download or file upload on a plugin admin page | Block Kit has neither | A kit address for admins |
+| A file input on a plugin admin page | Block Kit has none | Download: a raw plugin route returns the file. Upload: the owner adds the file to the media library and picks it with the media picker. **Earlier text here said a download was not possible. That was wrong** |
 | A custom field on a category, such as an icon | A category has a label, a slug and a description only | Keep the extra value in plugin storage keyed by the category |
 | A member id from the request, or a user on a public route | By design | Member routes are private |
 | Atomic rate limits without care | Plain read-then-write races | `compareAndSet` |
