@@ -81,8 +81,12 @@ Read from the EmDash source and from the live sites' own config files (`knowxthe
 | KnowX | Articles and categories as content, helpful votes, search log, report, FAQ, version badge | Site search from the kit page (needs the collection to have search turned on); listing content types (#16); in-text block (#17) | Product icon lives in plugin storage, since a category has no custom fields |
 | WB Maintenance Mode | Nothing | Nothing | Dropped: a plugin cannot intercept requests |
 
-### What must be decided or done outside the plugins
+### How to read all of this (owner, 2026-10-13)
 
-1. How our own sites install these: trusted install, or turn on the Worker Loader (needs the paid Workers plan).
-2. A mail provider on any site that should send the notices.
-3. Update one live site to EmDash 1.2 before the preview check.
+These are general plugins for any EmDash site owner, not for our own sites. Our sites' config above is one example, nothing more.
+
+- **Build on EmDash's own core.** Every EmDash site runs the same core, so plan around what the core provides. No per-site "what works here" checker.
+- **Visitors first.** About nine in ten EmDash sites have visitors only, no members, and EmDash is very new. The visitor path is the main product: voting, reviewing, suggesting and rating must work for a visitor on any hosting. Member-only extras come later.
+- **A visitor must never be locked out by hosting.** Where EmDash supplies a trusted visitor address, use it (salted hash). Where it does not, fall back to a browser cookie: one entry per browser, written content still waits for approval, and the admin page says the protection is weaker. (The cookie fallback is the build team's reading of "visitors first"; the owner can reverse it.)
+- **Registry install first.** Everything in a plan works from the registry install. A trusted install is an optional extra for blocks inside text, documented as a short second section.
+- **Email is a bonus.** A feature is complete without it. The notice goes out only where the site has mail.

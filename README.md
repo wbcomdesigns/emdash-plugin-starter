@@ -53,6 +53,7 @@ Each plugin repo carries everything an agent needs, with no shared conversation:
 - Kit markup is the same for every visitor, because site pages are cached without regard to cookies.
 - Nothing from an outside host in the kit. Sites only allow scripts and styles from themselves.
 - Every screen has loading, empty and error states, works at 390, and reads in dark mode.
+- **General plugins, visitors first (owner, 2026-10-13).** These are for any EmDash site owner, not for our own sites. About nine in ten EmDash sites have visitors only. Build on what EmDash core provides, design the registry install as the whole product, and make the visitor path work on any hosting.
 - **Admin first (owner, 2026-10-13).** EmDash is not member-focused for now. Scope each plugin around what the admin can do and what a visitor sees. Do not add member-side creation, dashboards or approval flows unless the owner asks for them.
 - **Compare with the WordPress plugin before locking a scope.** List its free features, mark each as here, not here, or no equivalent, and put the table in `SCOPE.md`. Free features only; paid ones stay out unless the owner picks one.
 - Everyone installing an EmDash plugin today is a developer, so setup may need one. What the owner and visitors use after setup must still be plain and complete.
