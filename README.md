@@ -10,10 +10,10 @@ This repository is two things:
 | Plugin | Repo | Lab port | Brand | State on 2026-10-13 |
 | --- | --- | --- | --- | --- |
 | Listora (directory) | `emdash-listora` | 4321 | Listora | Shipped. 0.3.1 on the registry |
-| Reviews and Ratings | `emdash-reviews` | 4331 | None yet: needs a mark | Engine, admin and 13 tests written. Kit written, never rendered |
+| WB Reviews | `emdash-reviews` | 4331 | WB Reviews | Engine, admin and 13 tests written. Kit written, never rendered |
 | Polls | `emdash-polls` | 4332 | WB Polls | Starter only |
 | KnowX Knowledge Base | `emdash-knowx` | 4333 | KnowX | Starter only |
-| Maintenance Mode | `emdash-maintenance` | 4334 | None yet: needs a mark | Starter only. First card is an investigation |
+| WB Maintenance Mode | `emdash-maintenance` | 4334 | WB Maintenance Mode | Starter only. First card is an investigation |
 | Roadmap and Feature Voting | `emdash-roadmap` | 4335 | Product Roadmap | Starter only |
 
 Each plugin repo carries everything an agent needs, with no shared conversation:
@@ -57,7 +57,7 @@ Each plugin repo carries everything an agent needs, with no shared conversation:
 
 Logos are never drawn in a plugin repo. They come from the brand pipeline in `~/Documents/brand logos/_render-src/`, which builds the whole set from one mark definition: `build_kit.py` for the WB plugin family (separate gradient shapes, no tile), `build_web_kit.py` for site brands (tile marks), `build_social.py` / `build_web_social.py` for banners, `preview_sheet.py` for the contact sheet, `update_brand_md.py` for the brand sheet. A plugin repo carries only `icon.png` (256, from the kit's mark) and `images/banner.png` (the no-tagline lockup on white).
 
-Kits built on 2026-10-13: KnowX, WB Polls, Product Roadmap. Reviews and Maintenance Mode have no mark yet.
+Kits built on 2026-10-13: KnowX, WB Polls, Product Roadmap, WB Reviews, WB Maintenance Mode.
 
 ## Open decisions for the owner
 
