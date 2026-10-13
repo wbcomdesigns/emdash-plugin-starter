@@ -19,12 +19,12 @@
 
 | Surface | Use it for |
 | --- | --- |
-| Admin pages (Block Kit: tables, forms, tabs, accordion, charts, meters, banners, repeater, media picker, conditional fields, button confirmations) | Queues, settings, reports |
+| Admin pages (Block Kit: tables, forms, tabs, accordion, charts, meters, banners, conditional fields, button confirmations). **Not in an admin-page form: the repeater and the media picker.** EmDash's guide calls them authoring elements for field widgets | Queues, settings, reports |
 | **Dashboard widgets** on the EmDash dashboard | "3 reviews waiting", "2 ideas waiting". The owner's alert, with no email needed |
 | **Saved-entry panels and actions** on the post and page editing screen | Polls: attach a poll while editing. Documented for registry plugins |
 | **Field widgets**: a custom field on any collection, storing a json value (text, number, toggle, select, media picker elements) | A "poll" or "rating" field the owner adds to a content type |
 | **Raw routes that return a file** (`response: "raw"`, `pluginResponse()`, `Content-Disposition` allowed) | A real spreadsheet download from the plugin itself |
-| Reading a media file's bytes (`media:bytes:read`, up to 16 MiB) with a media picker | Import a spreadsheet the owner uploaded to the media library, all inside the admin |
+| Reading a media file's bytes (`media:bytes:read`, up to 16 MiB) | Import a spreadsheet the owner uploaded to the media library. The owner chooses the file from a dropdown of media names built with `ctx.media.list` (`media:read`), because the media picker cannot sit in an admin-page form |
 | MCP tools on private routes | Let an AI agent manage polls or listings. Later |
 
 Only a trusted (native) plugin can add a block inside post text, React admin screens, raw page fragments, or Astro render components.
@@ -59,14 +59,20 @@ Live sites run EmDash 1.1. Anything here may be missing there, so each plugin st
 | A block inside post text | `admin.portableTextBlocks`, trusted install only. **Already working on our own live sites:** `packages/brndle-blocks` in `knowxtheme-com` and `woocustomdev-com` is a trusted plugin that adds blocks. Copy its shape. Not yet tried with one of these plugins | Polls #16, Reviews #19, Listora #50, Roadmap #18, KnowX #17 |
 | List the site's content types | `schema:read`, `ctx.schema.listCollections()` | Reviews #14, KnowX #16 |
 | Upload a file to the media library | `media:write`, `ctx.media.upload` or `getUploadUrl` | Listora #25 |
-| Pick a media file in an admin form | Block Kit `media_picker` | Listora #38 |
+| Pick a media file in an admin form | **Not with `media_picker`** (field widgets only). A dropdown of names from `ctx.media.list` is the way | Listora #25 |
 | Create a redirect | `redirects:write`, `ctx.redirects.create` | Roadmap #17 |
 | Number box, multi-line text, tick-boxes, tabs, combobox in admin forms | Block Kit `number_input`, `text_input` with `multiline`, `checkbox`, `tab`, `combobox` | Every Settings page |
 | Site search from a kit page | `search()` from `emdash` | KnowX search |
 | EmDash comments on a kit page of a custom collection | Comment functions exist; collection comment settings exist | Roadmap #13 |
 | A real file download from a plugin route | `response: "raw"` with `Content-Disposition`. Documented, not yet tried by us | Listora #46 |
-| Import from a media-library file | `media_picker` plus `media:bytes:read`. Documented, not yet tried by us | Listora #46 |
-| The site's time zone | Site settings have `timezone`. So no plugin setting is needed | Listora #39 |
+| Import from a media-library file | A dropdown of file names from `ctx.media.list`, then `media:bytes:read`. Not yet tried by us | Listora #46 |
+| The site's time zone | Proven in Listora #39. A kit page reads `getSiteSettings().timezone`. A plugin route cannot read it, so anything time-of-day (open now) is worked out by the page. EmDash refuses an unknown zone itself |
+
+## Found while building (2026-10-14)
+
+- A stored image field holds a media reference, not an address. To draw it use EmDash's `Image` component. For a share image or structured data, `Astro.locals.emdash.getPublicMediaUrl(storageKey)` gives the address; make it absolute.
+- A plugin route does not get an image address for a listing. Anything that must show a real photo is drawn by the site page, not from plugin JSON.
+- EmDash core has a gallery converter (`content/converters/gallery`). Look for a built-in gallery before building one.
 
 ## Not possible, so do not plan for it
 
