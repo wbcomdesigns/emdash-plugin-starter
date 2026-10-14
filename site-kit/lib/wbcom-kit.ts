@@ -1,4 +1,6 @@
-/* Browser helpers shared by every Wbcom EmDash plugin kit. Keep this file identical across plugins. */
+/* wbcom-shared: 2 */
+/* Browser helpers shared by every Wbcom EmDash plugin kit. Keep this file identical across plugins.
+   Same rules as styles/wbcom-base.css: only ever add, and raise the number on the first line. */
 
 const ESCAPES: Record<string, string> = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
 
