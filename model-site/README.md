@@ -1,5 +1,7 @@
 # Fieldnote model site
 
+The live reference site is public: [wbcomdesigns/emdash-showcase](https://github.com/wbcomdesigns/emdash-showcase). Clone it to see every Wbcom EmDash plugin on a standard EmDash blog site; its `scripts/build-model-site.sh` rebuilds Fieldnote from the same model data.
+
 The same realistic content and plugin data as the Fieldnote showcase (port 4350), for any plugin lab. Agents build features and take screenshots against this data, so every plugin is judged on one believable site: a notes app company with 8 posts, an About page with a poll, 10 partner listings with photos and 2 waiting, 10 roadmap items with 231 votes, 3 releases, 8 help articles, 4 FAQs, reviews with an owner reply, and the site named Fieldnote with admin Maya Lin.
 
 ## Where the data lives
