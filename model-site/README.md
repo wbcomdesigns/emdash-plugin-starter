@@ -25,4 +25,4 @@ To start over, run the loader again: it replaces the lab's database with the sna
 
 ## Refresh the snapshot (owner agent only)
 
-After the showcase gains new content or a plugin release: `bash model-site/snapshot.sh` (reads the showcase, never writes to it), check `plugin-ids.txt` still matches the showcase's registry install ids, commit.
+After the showcase gains new content or a plugin release: `bash model-site/snapshot.sh` (reads the showcase, never writes to it). It cleans a copy with `scrub.py` and replaces the committed snapshot only if the check passes. If it stops on a new table, review that table and add it to `ALLOWED_TABLES` only when it holds nothing personal. After changing `scrub.py`, run `python3 -I model-site/test_scrub.py`. Check `plugin-ids.txt` still matches the showcase's registry install ids, then commit.
