@@ -10,3 +10,5 @@ node_modules
 
 # The Fieldnote model-site snapshot is shared on purpose (sign-in tables are emptied by snapshot.sh).
 !model-site/snapshot/data.db
+model-site/snapshot/data.db-wal
+model-site/snapshot/data.db-shm
