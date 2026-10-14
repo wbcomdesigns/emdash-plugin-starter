@@ -74,6 +74,10 @@ Live sites run EmDash 1.1. Anything here may be missing there, so each plugin st
 - A stored image field holds a media reference, not an address. To draw it use EmDash's `Image` component. For a share image or structured data, `Astro.locals.emdash.getPublicMediaUrl(storageKey)` gives the address; make it absolute.
 - A plugin route does not get an image address for a listing. Anything that must show a real photo is drawn by the site page, not from plugin JSON.
 - EmDash core has a gallery converter (`content/converters/gallery`). Look for a built-in gallery before building one.
+- Block Kit has a real date picker: `date_input` (an `<input type="date">`). Never ask an owner to type an ISO date. A plugin route cannot read the site time zone (`ctx.site` has name, url, locale only), so an admin time is labelled "(UTC)" and paired with a `select` of times. WB Polls 0.2.3.
+- A Block Kit `select` ignores `placeholder` and renders empty until it has a value: give the first option a value ("" with a label such as "Choose a poll") and set `initial_value` to it.
+- A Block Kit table cell is one line: a `\n` in a cell does not render. Put details in their own columns.
+- An owner's edit to an unpublished entry is saved as a draft revision (`draftRevisionId`); `ctx.content.get` returns the original data. Reading the revision needs `content:revisions:read`, a new permission every site re-approves. Product Roadmap 0.1.3 refuses to approve an edited draft and asks the owner to publish from the editor instead.
 
 ## Not possible, so do not plan for it
 
@@ -87,6 +91,8 @@ Live sites run EmDash 1.1. Anything here may be missing there, so each plugin st
 | The visitor's location ("near me") | EmDash core sends `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()` on every page, so the browser refuses. Found in Listora #51 | Search by typed city. Dropped |
 | A member id from the request, or a user on a public route | By design | Member routes are private |
 | Atomic rate limits without care | Plain read-then-write races | `compareAndSet` |
+| Hiding a plugin admin page from some roles | Admin page entries take path, label and icon only. A subscriber who can reach the admin sees the menu item, and an admin-only route answers with EmDash's raw 403 text | Keep admin pages admin-only on the route; note it for owners. Found 2026-10-14 (KnowX Insights, Roadmap Ideas) |
+| Knowing in page HTML whether the visitor is signed in | Site pages are cached the same for everyone | Ask a member route from the browser; its 401 means guest (WB Polls ballot). Expect a 401 line in the browser console |
 
 ## Second check, 2026-10-13: will it work where it runs
 
