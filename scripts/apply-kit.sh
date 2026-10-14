@@ -12,6 +12,7 @@ for part in lib styles components pages; do
 	[[ -d "$PLUGIN/site-kit/$part" ]] || continue
 	mkdir -p "$LAB/src/$part"
 	for file in "$PLUGIN/site-kit/$part"/*; do
+		[[ -e "$file" ]] || continue
 		name="$(basename "$file")"
 		target="$LAB/src/$part/$name"
 		if [[ "$name" == wbcom-base.css || "$name" == wbcom-kit.ts ]] && [[ -f "$target" ]]; then
