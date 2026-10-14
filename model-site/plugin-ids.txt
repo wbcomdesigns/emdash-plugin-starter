@@ -1,0 +1,6 @@
+# Registry install id on the showcase = plugin slug in a lab's local build
+r_4dk64cimgjxrz74v=polls
+r_nt2pnhev44oaara3=reviews
+r_76xywti6l5cbxzos=roadmap
+r_2bzw2y6sgiq5c455=knowx
+r_2oeji6rfeg7ovdex=listora
