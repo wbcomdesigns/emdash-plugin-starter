@@ -4,7 +4,16 @@ The same realistic content and plugin data as the Fieldnote showcase (port 4350)
 
 ## Where the data lives
 
-The snapshot database (`model-site/snapshot/data.db`) stays on this machine and is never committed: a cleaned copy of a real site database cannot be proven free of every trace, so it is not distributed. The photos in `snapshot/uploads/` are committed (stock images). Agents run on this machine and load the local file. On another machine, ask the owner agent to take a snapshot there first.
+Two sources, one site. `load-into-lab.sh` picks the richest one available.
+
+| Source | Where | Has |
+| --- | --- | --- |
+| Full snapshot | `model-site/snapshot/data.db`, on the owner's machine only, never in git | Content, photos and each plugin's own data: votes, reviews, poll answers, settings |
+| Portable build | In git: `fieldnote-seed.json`, `media.json`, `images.json`, `snapshot/uploads/` | Content, photos, settings, menus and categories. No plugin activity |
+
+On any other machine the loader builds the portable version. Add plugin activity with your plugin's own lab script (`scripts/prove-lab.sh`; Polls also has `scripts/seed-lab-demo.mjs`) or by using the site in the browser as a guest and a subscriber. Force the portable build anywhere with `--portable`.
+
+A copy of a real site database is not distributed: it cannot be proven free of every trace. The portable files hold only authored content and stock photos, and are checked with `scrub.py`'s rules.
 
 ## Use it (agents)
 
@@ -29,4 +38,4 @@ To start over, run the loader again: it replaces the lab's database with the sna
 
 ## Refresh the snapshot (owner agent only)
 
-After the showcase gains new content or a plugin release: `bash model-site/snapshot.sh` (reads the showcase, never writes to it). It cleans a copy with `scrub.py` and replaces the committed snapshot only if the check passes. If it stops on a new table, review that table and add it to `ALLOWED_TABLES` only when it holds nothing personal. After changing `scrub.py`, run `python3 -I model-site/test_scrub.py`. Check `plugin-ids.txt` still matches the showcase's registry install ids, then commit.
+After the showcase gains new content or a plugin release: rebuild the portable files too (the owner agent exports them from the scrubbed snapshot and checks them with `scrub.py` rules), and `bash model-site/snapshot.sh` (reads the showcase, never writes to it). It cleans a copy with `scrub.py` and replaces the committed snapshot only if the check passes. If it stops on a new table, review that table and add it to `ALLOWED_TABLES` only when it holds nothing personal. After changing `scrub.py`, run `python3 -I model-site/test_scrub.py`. Check `plugin-ids.txt` still matches the showcase's registry install ids, then commit.

@@ -1,0 +1,2870 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "Exported Seed",
+		"description": "Exported from existing EmDash database"
+	},
+	"settings": {
+		"tagline": "Shared notes for small teams that ship",
+		"title": "Fieldnote"
+	},
+	"blockTypes": [],
+	"collections": [
+		{
+			"slug": "changelog",
+			"label": "Changelog",
+			"labelSingular": "Release",
+			"description": "What shipped",
+			"icon": "list",
+			"supports": [
+				"drafts",
+				"revisions",
+				"seo"
+			],
+			"urlPattern": "/changelog/{slug}",
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "summary",
+					"label": "Summary",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "released",
+					"label": "Released",
+					"type": "datetime"
+				}
+			]
+		},
+		{
+			"slug": "docs",
+			"label": "Help articles",
+			"labelSingular": "Help article",
+			"description": "KnowX help center articles",
+			"icon": "book",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"urlPattern": "/docs/{slug}",
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "excerpt",
+					"label": "Excerpt",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "applies_to_version",
+					"label": "Applies to version",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"slug": "faq",
+			"label": "FAQs",
+			"labelSingular": "FAQ",
+			"description": "KnowX frequently asked questions",
+			"icon": "help",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"urlPattern": "/docs/faq/{slug}",
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Question",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "answer",
+					"label": "Answer",
+					"type": "portableText",
+					"searchable": true
+				}
+			]
+		},
+		{
+			"slug": "listings",
+			"label": "Listings",
+			"labelSingular": "Listing",
+			"description": "Listora directory listings",
+			"icon": "buildings",
+			"admin": {
+				"listColumns": [
+					"listing_type",
+					"city"
+				]
+			},
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"urlPattern": "/listings/{slug}",
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Featured Image",
+					"type": "image"
+				},
+				{
+					"slug": "excerpt",
+					"label": "Excerpt",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "listing_type",
+					"label": "Listing type",
+					"type": "string",
+					"indexed": true,
+					"defaultValue": "business"
+				},
+				{
+					"slug": "phone",
+					"label": "Phone",
+					"type": "string"
+				},
+				{
+					"slug": "website",
+					"label": "Website",
+					"type": "url"
+				},
+				{
+					"slug": "email",
+					"label": "Email",
+					"type": "string"
+				},
+				{
+					"slug": "address",
+					"label": "Address",
+					"type": "string"
+				},
+				{
+					"slug": "city",
+					"label": "City",
+					"type": "string",
+					"indexed": true
+				},
+				{
+					"slug": "state",
+					"label": "State",
+					"type": "string"
+				},
+				{
+					"slug": "country",
+					"label": "Country",
+					"type": "string",
+					"indexed": true
+				},
+				{
+					"slug": "postal_code",
+					"label": "Postal code",
+					"type": "string"
+				},
+				{
+					"slug": "lat",
+					"label": "Latitude",
+					"type": "number",
+					"indexed": true
+				},
+				{
+					"slug": "lng",
+					"label": "Longitude",
+					"type": "number"
+				},
+				{
+					"slug": "is_claimed",
+					"label": "Claimed",
+					"type": "boolean",
+					"indexed": true,
+					"defaultValue": false
+				},
+				{
+					"slug": "gallery",
+					"label": "Photos",
+					"type": "repeater",
+					"validation": {
+						"subFields": [
+							{
+								"slug": "image",
+								"label": "Photo",
+								"type": "image",
+								"required": true
+							}
+						]
+					}
+				},
+				{
+					"slug": "is_featured",
+					"label": "Featured",
+					"type": "boolean",
+					"indexed": true,
+					"defaultValue": false
+				},
+				{
+					"slug": "owner_name",
+					"label": "Listed by",
+					"type": "string"
+				},
+				{
+					"slug": "rating_avg",
+					"label": "Rating",
+					"type": "number",
+					"indexed": true
+				},
+				{
+					"slug": "rating_count",
+					"label": "Rating count",
+					"type": "number"
+				},
+				{
+					"slug": "hours",
+					"label": "Hours",
+					"type": "text"
+				},
+				{
+					"slug": "services",
+					"label": "Services",
+					"type": "text"
+				},
+				{
+					"slug": "amenities",
+					"label": "Amenities",
+					"type": "string"
+				},
+				{
+					"slug": "price_range",
+					"label": "Price range",
+					"type": "string"
+				},
+				{
+					"slug": "cuisine",
+					"label": "Cuisine",
+					"type": "string"
+				},
+				{
+					"slug": "event_start",
+					"label": "Event start",
+					"type": "string",
+					"indexed": true
+				},
+				{
+					"slug": "event_end",
+					"label": "Event end",
+					"type": "string"
+				},
+				{
+					"slug": "expires_at",
+					"label": "Expires",
+					"type": "string"
+				},
+				{
+					"slug": "listing_status",
+					"label": "Listing status",
+					"type": "string",
+					"indexed": true,
+					"defaultValue": "live"
+				},
+				{
+					"slug": "type_fields",
+					"label": "Type fields",
+					"type": "text"
+				}
+			]
+		},
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"urlPattern": "/pages/{slug}",
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				}
+			]
+		},
+		{
+			"slug": "posts",
+			"label": "Posts",
+			"labelSingular": "Post",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"scheduling",
+				"search",
+				"seo"
+			],
+			"urlPattern": "/posts/{slug}",
+			"commentsEnabled": true,
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Featured Image",
+					"type": "image"
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "excerpt",
+					"label": "Excerpt",
+					"type": "text"
+				}
+			]
+		},
+		{
+			"slug": "roadmap",
+			"label": "Roadmap",
+			"labelSingular": "Roadmap item",
+			"description": "Public roadmap items people can vote on",
+			"icon": "map",
+			"admin": {
+				"listColumns": [
+					"stage"
+				]
+			},
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"seo"
+			],
+			"urlPattern": "/roadmap/{slug}",
+			"commentsEnabled": true,
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "stage",
+					"label": "Stage",
+					"type": "string",
+					"indexed": true,
+					"defaultValue": "Under review"
+				}
+			]
+		}
+	],
+	"defaultLocale": "en",
+	"taxonomies": [
+		{
+			"id": "tax:category",
+			"name": "category",
+			"label": "Categories",
+			"labelSingular": "Category",
+			"hierarchical": true,
+			"collections": [
+				"posts"
+			],
+			"terms": [
+				{
+					"id": "term:category:development",
+					"slug": "development",
+					"label": "Development"
+				},
+				{
+					"id": "term:category:design",
+					"slug": "design",
+					"label": "Design"
+				},
+				{
+					"id": "term:category:notes",
+					"slug": "notes",
+					"label": "Notes"
+				}
+			]
+		},
+		{
+			"id": "tax:doc_category",
+			"name": "doc_category",
+			"label": "Help categories",
+			"labelSingular": "Help category",
+			"hierarchical": true,
+			"collections": [
+				"docs"
+			],
+			"terms": [
+				{
+					"id": "term:doc_category:getting-started",
+					"slug": "getting-started",
+					"label": "Getting started",
+					"description": "Set up Fieldnote and invite your team."
+				},
+				{
+					"id": "term:doc_category:notes-and-sharing",
+					"slug": "notes-and-sharing",
+					"label": "Notes and sharing",
+					"description": "Write, organise and share notes."
+				},
+				{
+					"id": "term:doc_category:account-and-billing",
+					"slug": "account-and-billing",
+					"label": "Account and billing",
+					"description": "Plans, invoices and your workspace."
+				}
+			]
+		},
+		{
+			"id": "tax:listing_category",
+			"name": "listing_category",
+			"label": "Listing categories",
+			"labelSingular": "Listing category",
+			"hierarchical": true,
+			"collections": [
+				"listings"
+			]
+		},
+		{
+			"id": "tax:listing_feature",
+			"name": "listing_feature",
+			"label": "Listing features",
+			"labelSingular": "Listing feature",
+			"hierarchical": false,
+			"collections": [
+				"listings"
+			]
+		},
+		{
+			"id": "tax:listing_location",
+			"name": "listing_location",
+			"label": "Listing locations",
+			"labelSingular": "Listing location",
+			"hierarchical": true,
+			"collections": [
+				"listings"
+			]
+		},
+		{
+			"id": "tax:listing_tag",
+			"name": "listing_tag",
+			"label": "Listing tags",
+			"labelSingular": "Listing tag",
+			"hierarchical": false,
+			"collections": [
+				"listings"
+			]
+		},
+		{
+			"id": "tax:roadmap_category",
+			"name": "roadmap_category",
+			"label": "Roadmap categories",
+			"labelSingular": "Roadmap category",
+			"hierarchical": true,
+			"collections": [
+				"roadmap"
+			],
+			"terms": [
+				{
+					"id": "term:roadmap_category:editor",
+					"slug": "editor",
+					"label": "Editor"
+				},
+				{
+					"id": "term:roadmap_category:mobile",
+					"slug": "mobile",
+					"label": "Mobile"
+				},
+				{
+					"id": "term:roadmap_category:integrations",
+					"slug": "integrations",
+					"label": "Integrations"
+				}
+			]
+		},
+		{
+			"id": "tax:tag",
+			"name": "tag",
+			"label": "Tags",
+			"labelSingular": "Tag",
+			"hierarchical": false,
+			"collections": [
+				"posts"
+			],
+			"terms": [
+				{
+					"id": "term:tag:webdev",
+					"slug": "webdev",
+					"label": "Web Development"
+				},
+				{
+					"id": "term:tag:opinion",
+					"slug": "opinion",
+					"label": "Opinion"
+				},
+				{
+					"id": "term:tag:tools",
+					"slug": "tools",
+					"label": "Tools"
+				},
+				{
+					"id": "term:tag:creativity",
+					"slug": "creativity",
+					"label": "Creativity"
+				}
+			]
+		}
+	],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Primary Navigation",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Home",
+					"url": "/"
+				},
+				{
+					"type": "custom",
+					"label": "About",
+					"url": "/pages/about"
+				},
+				{
+					"type": "custom",
+					"label": "Posts",
+					"url": "/posts"
+				},
+				{
+					"type": "custom",
+					"label": "Partners",
+					"url": "/listings/"
+				},
+				{
+					"type": "custom",
+					"label": "Roadmap",
+					"url": "/roadmap/"
+				},
+				{
+					"type": "custom",
+					"label": "Changelog",
+					"url": "/changelog/"
+				},
+				{
+					"type": "custom",
+					"label": "Help",
+					"url": "/docs/"
+				},
+				{
+					"type": "custom",
+					"label": "Account",
+					"url": "/account/"
+				}
+			]
+		}
+	],
+	"widgetAreas": [
+		{
+			"name": "sidebar",
+			"label": "Sidebar",
+			"description": "Widget area displayed on single post pages",
+			"widgets": [
+				{
+					"type": "component",
+					"componentId": "core:search",
+					"title": "Search"
+				},
+				{
+					"type": "component",
+					"componentId": "core:categories",
+					"title": "Categories"
+				},
+				{
+					"type": "component",
+					"componentId": "core:tags",
+					"title": "Tags"
+				},
+				{
+					"type": "component",
+					"componentId": "core:recent-posts",
+					"title": "Recent Posts",
+					"settings": {
+						"count": 5,
+						"showDate": true
+					}
+				},
+				{
+					"type": "component",
+					"componentId": "core:archives",
+					"title": "Archives",
+					"settings": {
+						"type": "monthly",
+						"limit": 6
+					}
+				}
+			]
+		},
+		{
+			"name": "footer",
+			"label": "Footer",
+			"description": "Widget area displayed in the site footer",
+			"widgets": [
+				{
+					"type": "content",
+					"title": "About",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Fieldnote is a shared notebook for small teams. We write here about how teams plan, decide and ship.",
+									"_key": "k1"
+								}
+							],
+							"_key": "k0"
+						}
+					]
+				}
+			]
+		}
+	],
+	"sections": [
+		{
+			"slug": "about-author",
+			"title": "About the Author",
+			"content": [
+				{
+					"_type": "block",
+					"style": "normal",
+					"children": [
+						{
+							"_type": "span",
+							"text": "A software developer who writes about building things on the web. Based somewhere with good coffee and reliable internet.",
+							"_key": "k1"
+						}
+					],
+					"_key": "k0"
+				}
+			],
+			"description": "Brief author bio for use in posts or pages",
+			"keywords": [
+				"author",
+				"bio",
+				"about"
+			],
+			"source": "theme"
+		},
+		{
+			"slug": "newsletter-signup",
+			"title": "Newsletter Signup",
+			"content": [
+				{
+					"_type": "block",
+					"style": "h3",
+					"children": [
+						{
+							"_type": "span",
+							"text": "Stay in the loop",
+							"_key": "k1"
+						}
+					],
+					"_key": "k0"
+				},
+				{
+					"_type": "block",
+					"style": "normal",
+					"children": [
+						{
+							"_type": "span",
+							"text": "Get notified when new posts are published. No spam, unsubscribe anytime.",
+							"_key": "k3"
+						}
+					],
+					"_key": "k2"
+				}
+			],
+			"description": "A call-to-action block for newsletter subscriptions",
+			"keywords": [
+				"newsletter",
+				"subscribe",
+				"email",
+				"cta"
+			],
+			"source": "theme"
+		}
+	],
+	"bylines": [
+		{
+			"id": "byline:guest-contributor",
+			"slug": "guest-contributor",
+			"displayName": "Guest Contributor",
+			"isGuest": true
+		},
+		{
+			"id": "byline:emdash-editorial",
+			"slug": "emdash-editorial",
+			"displayName": "EmDash Editorial"
+		}
+	],
+	"content": {
+		"changelog": [
+			{
+				"id": "changelog:fieldnote-2-4",
+				"slug": "fieldnote-2-4",
+				"status": "published",
+				"data": {
+					"title": "Fieldnote 2.4",
+					"summary": "Faster search and Markdown import.",
+					"released": "2026-08-20T09:00:00.000Z"
+				}
+			},
+			{
+				"id": "changelog:fieldnote-2-5",
+				"slug": "fieldnote-2-5",
+				"status": "published",
+				"data": {
+					"title": "Fieldnote 2.5",
+					"summary": "Version history for every note, with one-click restore.",
+					"released": "2026-09-11T09:00:00.000Z"
+				}
+			},
+			{
+				"id": "changelog:fieldnote-2-6",
+				"slug": "fieldnote-2-6",
+				"status": "published",
+				"data": {
+					"title": "Fieldnote 2.6",
+					"summary": "Dark mode on every app and a home screen widget for iOS.",
+					"released": "2026-10-02T09:00:00.000Z"
+				}
+			}
+		],
+		"docs": [
+			{
+				"id": "docs:download-an-invoice",
+				"slug": "download-an-invoice",
+				"status": "published",
+				"data": {
+					"title": "Download an invoice",
+					"excerpt": "Every payment has a PDF invoice with your company details.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k0",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s0",
+									"text": "Open Settings, Billing, then Invoices.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k1",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s1",
+									"text": "Add company details",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k2",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s2",
+									"text": "Fill in your company name, address and tax number before the next payment so they appear on the invoice.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k3",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s3",
+									"text": "Older invoices",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k4",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s4",
+									"text": "All invoices since your first payment stay in the list.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						}
+					]
+				},
+				"taxonomies": {
+					"doc_category": [
+						"account-and-billing"
+					]
+				}
+			},
+			{
+				"id": "docs:change-your-plan",
+				"slug": "change-your-plan",
+				"status": "published",
+				"data": {
+					"title": "Change your plan",
+					"excerpt": "Move between Free, Team and Business at any time.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k0",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s0",
+									"text": "Admins can change the plan in Settings, Billing.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k1",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s1",
+									"text": "Upgrading",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k2",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s2",
+									"text": "The new plan starts at once. You pay the difference for the rest of the month.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k3",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s3",
+									"text": "Downgrading",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k4",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s4",
+									"text": "The change applies at the end of the billing month. Nothing is deleted; notes over the Free limit become read-only.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						}
+					]
+				},
+				"taxonomies": {
+					"doc_category": [
+						"account-and-billing"
+					]
+				}
+			},
+			{
+				"id": "docs:templates-for-meeting-notes",
+				"slug": "templates-for-meeting-notes",
+				"status": "published",
+				"data": {
+					"title": "Templates for meeting notes",
+					"excerpt": "Start every meeting with the same headings in one click.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k0",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s0",
+									"text": "A template is a note your team reuses as a starting point.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k1",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s1",
+									"text": "Make a template",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k2",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s2",
+									"text": "Write the note once, then choose More, Save as template.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k3",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s3",
+									"text": "Use it",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k4",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s4",
+									"text": "Choose New note, then pick the template. Dates and the attendee list fill in for you.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k5",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s5",
+									"text": "Share it with the team",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k6",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s6",
+									"text": "Templates saved in a shared folder are available to everyone in it.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						}
+					]
+				},
+				"taxonomies": {
+					"doc_category": [
+						"notes-and-sharing"
+					]
+				}
+			},
+			{
+				"id": "docs:organise-notes-in-folders",
+				"slug": "organise-notes-in-folders",
+				"status": "published",
+				"data": {
+					"title": "Organise notes in folders",
+					"excerpt": "Folders, tags and pins keep a busy workspace easy to scan.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k0",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s0",
+									"text": "Folders hold notes for one project or team. Tags cut across folders.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k1",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s1",
+									"text": "Pin what matters",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k2",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s2",
+									"text": "Pinned notes stay at the top of their folder for everyone.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k3",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s3",
+									"text": "Move many notes at once",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k4",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s4",
+									"text": "Select notes in the list, then drag them onto a folder in the sidebar.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						}
+					]
+				},
+				"taxonomies": {
+					"doc_category": [
+						"notes-and-sharing"
+					]
+				}
+			},
+			{
+				"id": "docs:share-a-note-with-a-link",
+				"slug": "share-a-note-with-a-link",
+				"status": "published",
+				"data": {
+					"title": "Share a note with a link",
+					"excerpt": "Send a read-only link to anyone, even without an account.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k0",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s0",
+									"text": "Open the note and choose Share, then Copy link.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k1",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s1",
+									"text": "Who can open it",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k2",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s2",
+									"text": "Anyone with the link can read the note. They cannot edit it or see your other notes.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k3",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s3",
+									"text": "Stop sharing",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k4",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s4",
+									"text": "Choose Share again and turn off the link. Old links stop working at once.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						}
+					]
+				},
+				"taxonomies": {
+					"doc_category": [
+						"notes-and-sharing"
+					]
+				}
+			},
+			{
+				"id": "docs:import-notes-from-another-app",
+				"slug": "import-notes-from-another-app",
+				"status": "published",
+				"data": {
+					"title": "Import notes from another app",
+					"excerpt": "Bring notes in from Notion, Evernote or plain Markdown files.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k0",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s0",
+									"text": "Fieldnote reads exports from the apps most teams use.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k1",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s1",
+									"text": "Notion and Evernote",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k2",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s2",
+									"text": "Export your workspace from the other app, then drop the file on Import in Fieldnote. Folders and tags come across.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k3",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s3",
+									"text": "Markdown",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k4",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s4",
+									"text": "Select a folder of .md files. Each file becomes a note; images in the same folder are attached.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k5",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s5",
+									"text": "What does not come across",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k6",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s6",
+									"text": "Comments and page history stay in the old app.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						}
+					]
+				},
+				"taxonomies": {
+					"doc_category": [
+						"getting-started"
+					]
+				}
+			},
+			{
+				"id": "docs:invite-your-team",
+				"slug": "invite-your-team",
+				"status": "published",
+				"data": {
+					"title": "Invite your team",
+					"excerpt": "Add teammates by email and choose what each person can do.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k0",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s0",
+									"text": "Open Settings, then Members, and choose Invite.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k1",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s1",
+									"text": "Roles",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k2",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s2",
+									"text": "Editors can write and share notes. Viewers can read and comment. Admins also manage billing and members.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k3",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s3",
+									"text": "Pending invites",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k4",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s4",
+									"text": "An invite stays open for seven days. You can resend or cancel it from the Members list.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						}
+					]
+				},
+				"taxonomies": {
+					"doc_category": [
+						"getting-started"
+					]
+				}
+			},
+			{
+				"id": "docs:create-your-workspace",
+				"slug": "create-your-workspace",
+				"status": "published",
+				"data": {
+					"title": "Create your workspace",
+					"excerpt": "Set up Fieldnote for your team in about five minutes.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k0",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s0",
+									"text": "A workspace holds your team's notes, folders and members. Most teams need just one.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k1",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s1",
+									"text": "Pick a name",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k2",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s2",
+									"text": "Use your team or company name. You can change it later in Settings.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k3",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s3",
+									"text": "Invite your team",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k4",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s4",
+									"text": "Add people by email. They get a link and join with their own account.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k5",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s5",
+									"text": "Make your first folder",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						},
+						{
+							"_type": "block",
+							"_key": "k6",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s6",
+									"text": "Start with one folder per project. Notes can move between folders at any time.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						}
+					]
+				},
+				"taxonomies": {
+					"doc_category": [
+						"getting-started"
+					]
+				}
+			}
+		],
+		"faq": [
+			{
+				"id": "faq:how-do-i-cancel",
+				"slug": "how-do-i-cancel",
+				"status": "published",
+				"data": {
+					"title": "How do I cancel?",
+					"answer": [
+						{
+							"_type": "block",
+							"_key": "k0",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s0",
+									"text": "An admin can cancel in Settings, Billing. You keep access until the end of the paid month and can export everything first.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						}
+					]
+				}
+			},
+			{
+				"id": "faq:where-is-my-data-stored",
+				"slug": "where-is-my-data-stored",
+				"status": "published",
+				"data": {
+					"title": "Where is my data stored?",
+					"answer": [
+						{
+							"_type": "block",
+							"_key": "k0",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s0",
+									"text": "In the EU or the US, chosen when the workspace is created. Your notes are encrypted at rest and in transit.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						}
+					]
+				}
+			},
+			{
+				"id": "faq:can-i-use-fieldnote-offline",
+				"slug": "can-i-use-fieldnote-offline",
+				"status": "published",
+				"data": {
+					"title": "Can I use Fieldnote offline?",
+					"answer": [
+						{
+							"_type": "block",
+							"_key": "k0",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s0",
+									"text": "The desktop and iOS apps keep your recent notes offline and sync when you are back online. Android offline mode is on the roadmap.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						}
+					]
+				}
+			},
+			{
+				"id": "faq:is-there-a-free-plan",
+				"slug": "is-there-a-free-plan",
+				"status": "published",
+				"data": {
+					"title": "Is there a free plan?",
+					"answer": [
+						{
+							"_type": "block",
+							"_key": "k0",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s0",
+									"text": "Yes. Free covers up to three members and 500 notes. Upgrade when your team grows.",
+									"marks": []
+								}
+							],
+							"markDefs": []
+						}
+					]
+				}
+			}
+		],
+		"listings": [
+			{
+				"id": "listings:notebook-academy",
+				"slug": "notebook-academy",
+				"status": "draft",
+				"data": {
+					"title": "Notebook Academy",
+					"excerpt": "Live classes on writing useful meeting notes.",
+					"description": "Two-hour live classes for team leads: meeting notes people read, decision logs and weekly summaries in Fieldnote.",
+					"listing_type": "education",
+					"phone": "",
+					"email": "",
+					"address": "Norrebrogade 44",
+					"city": "Copenhagen",
+					"state": "",
+					"country": "",
+					"postal_code": "",
+					"is_claimed": 0,
+					"is_featured": 0,
+					"owner_name": "Maya Lin",
+					"hours": [],
+					"services": [],
+					"amenities": "",
+					"price_range": "",
+					"cuisine": "",
+					"event_start": "",
+					"event_end": "",
+					"listing_status": "live",
+					"type_fields": {
+						"year_founded": "",
+						"star_rating": "",
+						"beds": "",
+						"baths": "",
+						"price": "",
+						"salary": "",
+						"job_type": "",
+						"specialty": "",
+						"program": "",
+						"asking_price": "",
+						"place_kind": ""
+					}
+				}
+			},
+			{
+				"id": "listings:brightline-studio",
+				"slug": "brightline-studio",
+				"status": "draft",
+				"data": {
+					"title": "Brightline Studio",
+					"excerpt": "Note templates and team onboarding for design agencies.",
+					"description": "Brightline sets up Fieldnote for design teams of 5 to 50: shared templates, review notes and a client handover space.",
+					"listing_type": "business",
+					"phone": "",
+					"email": "",
+					"address": "Keizersgracht 210",
+					"city": "Amsterdam",
+					"state": "",
+					"country": "",
+					"postal_code": "",
+					"is_claimed": 0,
+					"is_featured": 0,
+					"owner_name": "Maya Lin",
+					"hours": [],
+					"services": [],
+					"amenities": "",
+					"price_range": "",
+					"cuisine": "",
+					"event_start": "",
+					"event_end": "",
+					"listing_status": "live",
+					"type_fields": {
+						"year_founded": "",
+						"star_rating": "",
+						"beds": "",
+						"baths": "",
+						"price": "",
+						"salary": "",
+						"job_type": "",
+						"specialty": "",
+						"program": "",
+						"asking_price": "",
+						"place_kind": ""
+					}
+				}
+			},
+			{
+				"id": "listings:fieldnote-users-group-nyc",
+				"slug": "fieldnote-users-group-nyc",
+				"status": "published",
+				"data": {
+					"title": "Fieldnote Users Group NYC",
+					"featured_image": null,
+					"excerpt": "Monthly meetup for teams using Fieldnote in New York.",
+					"description": "Talks, templates swaps and open Q&A with the Fieldnote team. Free to attend; bring a laptop.",
+					"listing_type": "education",
+					"phone": "",
+					"website": "https://fieldnote-users.example",
+					"email": "nyc@fieldnote-users.example",
+					"address": "85 Broad Street",
+					"city": "New York",
+					"state": "NY",
+					"country": "United States",
+					"postal_code": "10004",
+					"lat": 40.7044,
+					"lng": -74.0112,
+					"is_claimed": 0,
+					"listing_status": "live"
+				}
+			},
+			{
+				"id": "listings:quiet-desk-coaching",
+				"slug": "quiet-desk-coaching",
+				"status": "published",
+				"data": {
+					"title": "Quiet Desk Coaching",
+					"featured_image": null,
+					"excerpt": "One-to-one coaching on note-taking for managers.",
+					"description": "Coaching for leads and managers who want calmer weeks: meeting notes that turn into actions, and a personal system that lasts.",
+					"listing_type": "business",
+					"phone": "+353 1 555 0161",
+					"website": "https://quietdesk.example",
+					"email": "hello@quietdesk.example",
+					"address": "22 Fitzwilliam Square",
+					"city": "Dublin",
+					"state": "",
+					"country": "Ireland",
+					"postal_code": "D02 YP71",
+					"lat": 53.3343,
+					"lng": -6.2517,
+					"is_claimed": 0,
+					"listing_status": "live"
+				}
+			},
+			{
+				"id": "listings:bright-margin",
+				"slug": "bright-margin",
+				"status": "published",
+				"data": {
+					"title": "Bright Margin",
+					"featured_image": null,
+					"excerpt": "Documentation sprints for engineering teams.",
+					"description": "Two-week sprints that turn scattered docs into a clear Fieldnote handbook: onboarding, runbooks and architecture notes.",
+					"listing_type": "business",
+					"phone": "+61 3 5550 1144",
+					"website": "https://brightmargin.example",
+					"email": "hello@brightmargin.example",
+					"address": "120 Flinders Lane",
+					"city": "Melbourne",
+					"state": "VIC",
+					"country": "Australia",
+					"postal_code": "3000",
+					"lat": -37.8162,
+					"lng": 144.969,
+					"is_claimed": 0,
+					"listing_status": "live"
+				}
+			},
+			{
+				"id": "listings:tidewater-digital",
+				"slug": "tidewater-digital",
+				"status": "published",
+				"data": {
+					"title": "Tidewater Digital",
+					"featured_image": null,
+					"excerpt": "Integrations between Fieldnote and your other tools.",
+					"description": "Custom connections to Jira, HubSpot and internal systems, plus Slack and Teams notifications built on the Fieldnote API.",
+					"listing_type": "business",
+					"phone": "+351 21 555 0123",
+					"website": "https://tidewater.example",
+					"email": "ola@tidewater.example",
+					"address": "Rua da Prata 80",
+					"city": "Lisbon",
+					"state": "",
+					"country": "Portugal",
+					"postal_code": "1100-415",
+					"lat": 38.7101,
+					"lng": -9.1366,
+					"is_claimed": 0,
+					"listing_status": "live"
+				}
+			},
+			{
+				"id": "listings:pathway-academy",
+				"slug": "pathway-academy",
+				"status": "published",
+				"data": {
+					"title": "Pathway Academy",
+					"featured_image": null,
+					"excerpt": "Certified admin training in English and Mandarin.",
+					"description": "A two-day course for workspace admins covering roles, sharing, data residency and billing. Includes the Fieldnote Certified Admin exam.",
+					"listing_type": "education",
+					"phone": "+65 6555 0190",
+					"website": "https://pathway.example",
+					"email": "learn@pathway.example",
+					"address": "71 Ayer Rajah Crescent",
+					"city": "Singapore",
+					"state": "",
+					"country": "Singapore",
+					"postal_code": "139951",
+					"lat": 1.2966,
+					"lng": 103.7876,
+					"is_claimed": 0,
+					"listing_status": "live"
+				}
+			},
+			{
+				"id": "listings:kestrel-learning",
+				"slug": "kestrel-learning",
+				"status": "published",
+				"data": {
+					"title": "Kestrel Learning",
+					"featured_image": null,
+					"excerpt": "Half-day Fieldnote workshops for new teams.",
+					"description": "Hands-on workshops for up to 20 people: writing useful meeting notes, organising a shared workspace, and keeping it tidy as you grow.",
+					"listing_type": "education",
+					"phone": "+44 161 496 0177",
+					"website": "https://kestrel.example",
+					"email": "courses@kestrel.example",
+					"address": "3 Hardman Street",
+					"city": "Manchester",
+					"state": "",
+					"country": "United Kingdom",
+					"postal_code": "M3 3HF",
+					"lat": 53.4794,
+					"lng": -2.2508,
+					"is_claimed": 0,
+					"listing_status": "live"
+				}
+			},
+			{
+				"id": "listings:cardinal-ops",
+				"slug": "cardinal-ops",
+				"status": "published",
+				"data": {
+					"title": "Cardinal Ops",
+					"featured_image": null,
+					"excerpt": "Fieldnote rollouts for remote-first companies.",
+					"description": "Cardinal Ops plans and runs company-wide rollouts across time zones, with champions in each team and weekly adoption reports.",
+					"listing_type": "business",
+					"phone": "+1 416 555 0173",
+					"website": "https://cardinalops.example",
+					"email": "contact@cardinalops.example",
+					"address": "250 King Street West",
+					"city": "Toronto",
+					"state": "ON",
+					"country": "Canada",
+					"postal_code": "M5V 1H9",
+					"lat": 43.6465,
+					"lng": -79.3893,
+					"is_claimed": 0,
+					"listing_status": "live"
+				}
+			},
+			{
+				"id": "listings:open-shelf-studio",
+				"slug": "open-shelf-studio",
+				"status": "published",
+				"data": {
+					"title": "Open Shelf Studio",
+					"featured_image": null,
+					"excerpt": "Templates and onboarding kits for product teams.",
+					"description": "Open Shelf builds template libraries for product and design teams: discovery notes, decision records and launch checklists, ready to import.",
+					"listing_type": "business",
+					"phone": "+1 512 555 0148",
+					"website": "https://openshelf.example",
+					"email": "hi@openshelf.example",
+					"address": "1100 East 6th Street",
+					"city": "Austin",
+					"state": "TX",
+					"country": "United States",
+					"postal_code": "78702",
+					"lat": 30.2649,
+					"lng": -97.7296,
+					"is_claimed": 0,
+					"listing_status": "live"
+				}
+			},
+			{
+				"id": "listings:ledger-leaf",
+				"slug": "ledger-leaf",
+				"status": "published",
+				"data": {
+					"title": "Ledger & Leaf",
+					"featured_image": null,
+					"excerpt": "Knowledge base design for finance and legal teams.",
+					"description": "We design note structures that pass audits: folder conventions, templates for policies, and review workflows your compliance team signs off.",
+					"listing_type": "business",
+					"phone": "+49 30 901820",
+					"website": "https://ledgerleaf.example",
+					"email": "team@ledgerleaf.example",
+					"address": "Torstrasse 101",
+					"city": "Berlin",
+					"state": "",
+					"country": "Germany",
+					"postal_code": "10119",
+					"lat": 52.5292,
+					"lng": 13.4011,
+					"is_claimed": 0,
+					"listing_status": "live"
+				}
+			},
+			{
+				"id": "listings:northbeam-consulting",
+				"slug": "northbeam-consulting",
+				"status": "published",
+				"data": {
+					"title": "Northbeam Consulting",
+					"featured_image": null,
+					"excerpt": "Workspace setup and migration for teams of 20 to 500.",
+					"description": "Northbeam moves teams onto Fieldnote from Confluence, Notion and shared drives. Fixed-price migrations, training on day one, and a 30-day check-in.",
+					"listing_type": "business",
+					"phone": "+44 20 7946 0102",
+					"website": "https://northbeam.example",
+					"email": "hello@northbeam.example",
+					"address": "48 Clerkenwell Road",
+					"city": "London",
+					"state": "",
+					"country": "United Kingdom",
+					"postal_code": "EC1M 5PS",
+					"lat": 51.5225,
+					"lng": -0.1047,
+					"is_claimed": 0,
+					"listing_status": "live"
+				}
+			}
+		],
+		"pages": [
+			{
+				"id": "pages:about",
+				"slug": "about",
+				"status": "published",
+				"data": {
+					"title": "About",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "a0",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s0",
+									"text": "Fieldnote is a shared notebook for small teams. Meeting notes, decisions and project docs live in one place, and everyone can find them.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "a1",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s1",
+									"text": "We started in 2023 after one too many lost decisions in chat threads. Today about 4,000 teams use Fieldnote, from two-person studios to 300-person companies.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "a2",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s2",
+									"text": "How we work",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "a3",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "s3",
+									"text": "Our roadmap is public and you can vote on what we build next. Every release is in the changelog. If something is unclear, the help center has step-by-step guides, and a real person answers at help@fieldnote.example.",
+									"marks": []
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"posts": [
+			{
+				"id": "posts:work-in-progress",
+				"slug": "work-in-progress",
+				"status": "draft",
+				"data": {
+					"title": "Work in Progress",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "This is a draft post that won't appear in the public listing.",
+									"_key": "k1"
+								}
+							],
+							"_key": "k0"
+						}
+					],
+					"excerpt": "This post is still being written."
+				}
+			},
+			{
+				"id": "posts:notes-on-simplicity",
+				"slug": "notes-on-simplicity",
+				"status": "published",
+				"data": {
+					"title": "Notes on Simplicity",
+					"featured_image": null,
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Every piece of software starts simple. A few files, a clear purpose, a small surface area. Then features get added, edge cases get handled, and before long you're looking at something that requires a diagram to understand. This isn't inevitable, but it takes discipline to prevent.",
+									"_key": "k1"
+								}
+							],
+							"_key": "k0"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The hard part of simplicity isn't the initial design. It's the ongoing resistance to complication. Every feature request, every bug fix, every refactor is an opportunity to add complexity. Saying no is the most important design skill, and the least celebrated.",
+									"_key": "k3"
+								}
+							],
+							"_key": "k2"
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Removing as a feature",
+									"_key": "k5"
+								}
+							],
+							"_key": "k4"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The best version of a product often has fewer features than the previous one. Not because features were missing, but because someone had the courage to remove things that weren't earning their keep. Every feature has a cost - in maintenance, in cognitive load, in the weight of the interface.",
+									"_key": "k7"
+								}
+							],
+							"_key": "k6"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Simplicity is a practice, not a destination. You never arrive at simple. You just keep asking: is this necessary? Could this be clearer? Is there a way to solve this problem by removing something instead of adding something? The answer is yes more often than you'd expect.",
+									"_key": "k9"
+								}
+							],
+							"_key": "k8"
+						}
+					],
+					"excerpt": "Simplicity isn't the absence of complexity. It's the result of understanding a problem well enough to solve it cleanly."
+				},
+				"taxonomies": {
+					"category": [
+						"notes"
+					],
+					"tag": [
+						"opinion"
+					]
+				}
+			},
+			{
+				"id": "posts:a-weekend-with-a-side-project",
+				"slug": "a-weekend-with-a-side-project",
+				"status": "published",
+				"data": {
+					"title": "A Weekend with a Side Project",
+					"featured_image": null,
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Saturday morning. Coffee's made, the house is quiet, and I've got an idea that's been nagging at me all week. Not a good idea, necessarily - just a persistent one. A small tool that does a thing I keep doing manually. How hard could it be?",
+									"_key": "k1"
+								}
+							],
+							"_key": "k0"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "This is the best kind of programming. No requirements document, no sprint planning, no pull request reviews. Just a text editor and a problem. The freedom to make terrible architectural decisions, rewrite everything twice, and follow tangents that turn out to be dead ends.",
+									"_key": "k3"
+								}
+							],
+							"_key": "k2"
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Why side projects matter",
+									"_key": "k5"
+								}
+							],
+							"_key": "k4"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Side projects are where you learn things your day job would never teach you. Not because the problems are harder, but because you're free to take risks. Try a language you've never used. Build something without a framework. Deploy to a platform you've only read about. The stakes are zero, which makes the learning maximum.",
+									"_key": "k7"
+								}
+							],
+							"_key": "k6"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "By Sunday evening, the thing sort of works. It's rough, the error handling is nonexistent, and the README is a single sentence. But it solves the problem I set out to solve, and I learned three things I didn't know on Friday. Not a bad weekend.",
+									"_key": "k9"
+								}
+							],
+							"_key": "k8"
+						}
+					],
+					"excerpt": "No stakeholders, no deadlines, no Jira tickets. Just you and a dumb idea that might turn into something."
+				},
+				"taxonomies": {
+					"category": [
+						"development"
+					],
+					"tag": [
+						"creativity"
+					]
+				}
+			},
+			{
+				"id": "posts:designing-with-constraints",
+				"slug": "designing-with-constraints",
+				"status": "published",
+				"data": {
+					"title": "Designing with Constraints",
+					"featured_image": null,
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Give a designer a blank canvas and unlimited time, and they'll often produce something mediocre. Give them a tight brief, a small screen, and a deadline, and they'll surprise you. This isn't a paradox - it's how creativity actually works.",
+									"_key": "k1"
+								}
+							],
+							"_key": "k0"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Constraints force decisions. When you can't use more than two typefaces, you have to choose carefully. When the page has to load in under a second, every element earns its place. When the interface has to work on a 320px screen, you discover what's truly essential.",
+									"_key": "k3"
+								}
+							],
+							"_key": "k2"
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Embracing the box",
+									"_key": "k5"
+								}
+							],
+							"_key": "k4"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The web itself is a constraint. HTML flows in one direction. CSS has a box model. Browsers have viewport sizes and font rendering quirks. You can fight these constraints or you can work with them, and the results are dramatically different.",
+									"_key": "k7"
+								}
+							],
+							"_key": "k6"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The designs I admire most don't look like they were forced through a framework. They look like they grew naturally from the medium, respecting its grain rather than working against it. That only happens when you treat constraints as creative partners rather than enemies.",
+									"_key": "k9"
+								}
+							],
+							"_key": "k8"
+						}
+					],
+					"excerpt": "Limitations aren't obstacles to creativity. They're the structure that makes creativity possible."
+				},
+				"taxonomies": {
+					"category": [
+						"design"
+					],
+					"tag": [
+						"creativity"
+					]
+				}
+			},
+			{
+				"id": "posts:small-tools-big-impact",
+				"slug": "small-tools-big-impact",
+				"status": "published",
+				"data": {
+					"title": "Small Tools, Big Impact",
+					"featured_image": null,
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "There's a class of software that doesn't get enough appreciation. Not the frameworks or the platforms or the IDEs, but the small, sharp tools that solve one problem so well you stop thinking about them. They become invisible, which is the highest compliment you can pay a tool.",
+									"_key": "k1"
+								}
+							],
+							"_key": "k0"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "I'm talking about things like ripgrep, which searches code so fast it changed how I think about searching. Or jq, which makes JSON feel like a first-class data format in the terminal. Or curl, which has been quietly powering the internet's plumbing for decades.",
+									"_key": "k3"
+								}
+							],
+							"_key": "k2"
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The Unix philosophy, revisited",
+									"_key": "k5"
+								}
+							],
+							"_key": "k4"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Do one thing well. The advice is old enough to be a cliche, but the best modern tools still follow it. They don't try to be platforms. They don't have plugin ecosystems or configuration languages or startup wizards. They do their job and they compose with other tools that do theirs.",
+									"_key": "k7"
+								}
+							],
+							"_key": "k6"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The temptation is always to add more. One more feature, one more option, one more integration. But every addition is a decision someone has to make, a path through the code that has to be maintained, a thing that can break. The best tools resist this. They stay small, and in staying small, they stay reliable.",
+									"_key": "k9"
+								}
+							],
+							"_key": "k8"
+						}
+					],
+					"excerpt": "The best developer tools do one thing well and get out of your way. A love letter to focused software."
+				},
+				"taxonomies": {
+					"category": [
+						"development"
+					],
+					"tag": [
+						"tools"
+					]
+				}
+			},
+			{
+				"id": "posts:learning-in-public",
+				"slug": "learning-in-public",
+				"status": "published",
+				"data": {
+					"title": "Learning in Public",
+					"featured_image": null,
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "I started writing about things I was learning not because I had anything original to say, but because I kept forgetting what I'd figured out. The blog posts were notes to my future self, published publicly more out of laziness than courage.",
+									"_key": "k1"
+								}
+							],
+							"_key": "k0"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "What I didn't expect was how much the writing itself would accelerate the learning. There's a particular kind of clarity that comes from trying to explain something to someone else. The gaps in your understanding, which you can happily ignore when the knowledge lives only in your head, become painfully obvious when you try to put it into sentences.",
+									"_key": "k3"
+								}
+							],
+							"_key": "k2"
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The fear of being wrong",
+									"_key": "k5"
+								}
+							],
+							"_key": "k4"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The biggest barrier isn't time or writing skill. It's the fear of publishing something that turns out to be wrong. But here's the thing: being wrong publicly is one of the most efficient ways to learn. Someone will correct you, often kindly, and you'll remember that correction forever.",
+									"_key": "k7"
+								}
+							],
+							"_key": "k6"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The posts that helped me most weren't written by experts. They were written by people one step ahead of me on the same path, in language that hadn't yet been polished into abstraction. There's a place for that kind of writing, and it's more valuable than most people realize.",
+									"_key": "k9"
+								}
+							],
+							"_key": "k8"
+						}
+					],
+					"excerpt": "Writing about what you're learning is the fastest way to find out what you don't actually understand."
+				},
+				"taxonomies": {
+					"category": [
+						"notes"
+					],
+					"tag": [
+						"opinion"
+					]
+				}
+			},
+			{
+				"id": "posts:the-case-for-static",
+				"slug": "the-case-for-static",
+				"status": "published",
+				"data": {
+					"title": "The Case for Static",
+					"featured_image": null,
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "There's a certain irony in the fact that the web started static, went dynamic, and is now swinging back toward static again. But the static sites of today aren't the hand-coded HTML pages of 1998. They're generated, optimized, and deployed to edge networks that serve them in milliseconds.",
+									"_key": "k1"
+								}
+							],
+							"_key": "k0"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The pitch for server-rendered everything was compelling: dynamic content, personalization, real-time data. But most sites don't need most of that most of the time. A blog post doesn't need to be rendered on every request. A product page doesn't change every second.",
+									"_key": "k3"
+								}
+							],
+							"_key": "k2"
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The performance argument",
+									"_key": "k5"
+								}
+							],
+							"_key": "k4"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "A static file served from a CDN is as fast as the web gets. No cold starts, no database queries, no server-side rendering overhead. The Time to First Byte is essentially the network latency to your nearest edge node. You can't beat physics.",
+									"_key": "k7"
+								}
+							],
+							"_key": "k6"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "And when you do need dynamic behavior, you can add it surgically. An island of interactivity in a sea of static HTML. The best of both worlds, without paying the cost of either at all times.",
+									"_key": "k9"
+								}
+							],
+							"_key": "k8"
+						}
+					],
+					"excerpt": "Static sites aren't a step backwards. They're what you get when you take performance and simplicity seriously."
+				},
+				"taxonomies": {
+					"category": [
+						"development"
+					],
+					"tag": [
+						"webdev",
+						"opinion"
+					]
+				},
+				"bylines": [
+					{
+						"byline": "byline:emdash-editorial"
+					}
+				]
+			},
+			{
+				"id": "posts:building-for-the-long-term",
+				"slug": "building-for-the-long-term",
+				"status": "published",
+				"data": {
+					"title": "Building for the Long Term",
+					"featured_image": null,
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Every few years the industry collectively decides that everything we've been doing is wrong and there's a better way. New frameworks, new paradigms, new build tools. The churn is relentless, and if you're not careful, you spend more time migrating than building.",
+									"_key": "k1"
+								}
+							],
+							"_key": "k0"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "I've been writing software long enough to have seen several of these cycles. jQuery to Backbone to Angular to React to whatever comes next. Each transition felt urgent at the time. Looking back, the things that actually mattered were rarely about the framework.",
+									"_key": "k3"
+								}
+							],
+							"_key": "k2"
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [
+								{
+									"_type": "span",
+									"text": "What survives",
+									"_key": "k5"
+								}
+							],
+							"_key": "k4"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Clean data models survive. Clear boundaries between systems survive. Good naming survives. The decision to keep things simple when you could have made them clever - that definitely survives.",
+									"_key": "k7"
+								}
+							],
+							"_key": "k6"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "What doesn't survive is code that was written to impress, abstractions built for problems that never materialized, and architectures designed around a framework's opinions rather than the domain's reality.",
+									"_key": "k9"
+								}
+							],
+							"_key": "k8"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The best code I've written is boring. It reads like prose, does one thing well, and doesn't require a PhD in category theory to understand. The worst code I've written was technically impressive at the time.",
+									"_key": "k11"
+								}
+							],
+							"_key": "k10"
+						}
+					],
+					"excerpt": "The frameworks will change. The databases will change. What survives is the clarity of your thinking."
+				},
+				"taxonomies": {
+					"category": [
+						"development"
+					],
+					"tag": [
+						"opinion"
+					]
+				},
+				"bylines": [
+					{
+						"byline": "byline:emdash-editorial"
+					},
+					{
+						"byline": "byline:guest-contributor",
+						"roleLabel": "Guest essay"
+					}
+				]
+			}
+		],
+		"roadmap": [
+			{
+				"id": "roadmap:reminders-on-notes",
+				"slug": "reminders-on-notes",
+				"status": "draft",
+				"data": {
+					"title": "Reminders on notes",
+					"description": "Let me set a date on a note so it shows up again when I need it.",
+					"stage": "Under review"
+				}
+			},
+			{
+				"id": "roadmap:export-a-folder-as-pdf",
+				"slug": "export-a-folder-as-pdf",
+				"status": "draft",
+				"data": {
+					"title": "Export a folder as PDF",
+					"description": "Our clients want a single PDF of the project notes at the end of each engagement.",
+					"stage": "Under review"
+				}
+			},
+			{
+				"id": "roadmap:ios-home-screen-widget",
+				"slug": "ios-home-screen-widget",
+				"status": "published",
+				"data": {
+					"title": "iOS home screen widget",
+					"description": "Pinned notes on your home screen, one tap to open.",
+					"stage": "Done"
+				},
+				"taxonomies": {
+					"roadmap_category": [
+						"mobile"
+					]
+				}
+			},
+			{
+				"id": "roadmap:version-history",
+				"slug": "version-history",
+				"status": "published",
+				"data": {
+					"title": "Version history",
+					"description": "See and restore any earlier version of a note.",
+					"stage": "Done"
+				},
+				"taxonomies": {
+					"roadmap_category": [
+						"editor"
+					]
+				}
+			},
+			{
+				"id": "roadmap:dark-mode",
+				"slug": "dark-mode",
+				"status": "published",
+				"data": {
+					"title": "Dark mode",
+					"description": "Follows your system setting on every app.",
+					"stage": "Done"
+				},
+				"taxonomies": {
+					"roadmap_category": [
+						"editor"
+					]
+				}
+			},
+			{
+				"id": "roadmap:two-way-notion-sync",
+				"slug": "two-way-notion-sync",
+				"status": "published",
+				"data": {
+					"title": "Two-way Notion sync",
+					"description": "Keep a Notion page and a Fieldnote note in step.",
+					"stage": "In progress"
+				},
+				"taxonomies": {
+					"roadmap_category": [
+						"integrations"
+					]
+				}
+			},
+			{
+				"id": "roadmap:comments-on-any-paragraph",
+				"slug": "comments-on-any-paragraph",
+				"status": "published",
+				"data": {
+					"title": "Comments on any paragraph",
+					"description": "Start a thread next to the exact line you are talking about.",
+					"stage": "In progress"
+				},
+				"taxonomies": {
+					"roadmap_category": [
+						"editor"
+					]
+				}
+			},
+			{
+				"id": "roadmap:shared-template-library",
+				"slug": "shared-template-library",
+				"status": "published",
+				"data": {
+					"title": "Shared template library",
+					"description": "Browse and reuse templates other teams have published.",
+					"stage": "Planned"
+				},
+				"taxonomies": {
+					"roadmap_category": [
+						"editor"
+					]
+				}
+			},
+			{
+				"id": "roadmap:offline-mode-for-android",
+				"slug": "offline-mode-for-android",
+				"status": "published",
+				"data": {
+					"title": "Offline mode for Android",
+					"description": "Read and edit recent notes without a connection on Android.",
+					"stage": "Planned"
+				},
+				"taxonomies": {
+					"roadmap_category": [
+						"mobile"
+					]
+				}
+			},
+			{
+				"id": "roadmap:slack-notifications",
+				"slug": "slack-notifications",
+				"status": "published",
+				"data": {
+					"title": "Slack notifications",
+					"description": "Post a message to a channel when a shared note changes.",
+					"stage": "Under review"
+				},
+				"taxonomies": {
+					"roadmap_category": [
+						"integrations"
+					]
+				}
+			},
+			{
+				"id": "roadmap:handwriting-on-ipad",
+				"slug": "handwriting-on-ipad",
+				"status": "published",
+				"data": {
+					"title": "Handwriting on iPad",
+					"description": "Write with Apple Pencil and keep the ink searchable.",
+					"stage": "Under review"
+				},
+				"taxonomies": {
+					"roadmap_category": [
+						"mobile"
+					]
+				}
+			},
+			{
+				"id": "roadmap:calendar-integration",
+				"slug": "calendar-integration",
+				"status": "published",
+				"data": {
+					"title": "Calendar integration",
+					"description": "Open the meeting note straight from your Google or Outlook calendar event.",
+					"stage": "Under review"
+				},
+				"taxonomies": {
+					"roadmap_category": [
+						"integrations"
+					]
+				}
+			}
+		]
+	}
+}
