@@ -137,3 +137,10 @@ These are general plugins for any EmDash site owner, not for our own sites. Our 
 - **Admin-only (private) plugin routes refuse a plain browser link.** A cookie session must send `X-EmDash-Request: 1`, on GET too, or the answer is 403 `CSRF_REJECTED`. So a file download from a private route needs page script (`fetch` with the header, then a blob link). An admin Block Kit page cannot start one.
 - **A top-level `link` block is invalid.** Put links inside `{ type: "actions", elements: [...] }` or a table cell.
 - **`emdash seed <file> --no-content`** adds a collection, fields and taxonomies to a site that already has content (default `--on-conflict skip`). Local SQLite only as far as we have proven.
+
+## Proven on 2026-10-14 (standard blog site, all five Wbcom plugins installed from the registry)
+
+- **Registry installs get a generated id.** Routes live at `/_emdash/api/plugins/r_<16 base32>/`, the id being SHA-256(`<publisher DID>\n<slug>`) truncated (`emdash/src/registry/plugin-id.ts`). The slug address answers 404 "Plugin route not found". EmDash's own api-routes guide still says `<slug>`. Use `pluginFetch()` from `site-kit/lib/wbcom-kit.ts` (version 3) for every kit request. Our ids: listora `r_2oeji6rfeg7ovdex`, reviews `r_nt2pnhev44oaara3`, polls `r_4dk64cimgjxrz74v`, roadmap `r_76xywti6l5cbxzos`, knowx `r_2bzw2y6sgiq5c455`.
+- **Admin pages and dashboard cards work** on a registry install (EmDash links them under the generated id itself).
+- **The admin's registry screen** shows a generic plug icon in the list; the plugin's own icon, banner and screenshots show on its detail page once it loads.
+- **The default template is blog** (`npm create emdash@latest` with no template = cloudflare + blog). Test on it.

@@ -33,6 +33,7 @@ Each plugin repo carries everything an agent needs, with no shared conversation:
 - **One agent per plugin.** The repos, lab sites and ports are separate, so the five can run at the same time on one machine.
 - Tell the agent one thing: "Read `ops/handoff.md` in `~/code/emdash-<slug>` and work the cards in order."
 - An agent stops at a passing gate. It never publishes. A registry release cannot be changed.
+- **Test on the standard site (owner, 2026-10-14).** A fresh `npm create emdash@latest` blog site, the plugin installed from the registry, the kit copied from the release tag by its own install guide. See the `emdash-plugin-development` skill, section 6.
 - **Any mix, any version (owner, 2026-10-14).** A site may run one of these plugins, any mix, or all of them, each updated at its own pace. Every decision is checked against all of those cases: a plugin works alone, never depends on another, and never changes how another looks. The two shared files carry a number on their first line (`wbcom-shared: N`); they only ever gain rules, and a kit never replaces a newer copy with an older one (`scripts/apply-kit.sh` compares the numbers). A look that belongs to one plugin lives in its own stylesheet under its own prefix. Names the site owner sees are prefixed too ("Roadmap categories", "Help categories"), so two plugins never show the same label.
 - An agent does not edit `site-kit/lib/wbcom-kit.ts` or `site-kit/styles/wbcom-base.css` in its own repo. A change to either is made here first and then copied to every plugin, by whoever owns this repo.
 

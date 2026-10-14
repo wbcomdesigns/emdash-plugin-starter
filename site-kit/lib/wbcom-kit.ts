@@ -1,4 +1,4 @@
-/* wbcom-shared: 2 */
+/* wbcom-shared: 3 */
 /* Browser helpers shared by every Wbcom EmDash plugin kit. Keep this file identical across plugins.
    Same rules as styles/wbcom-base.css: only ever add, and raise the number on the first line. */
 
@@ -15,10 +15,75 @@ export function signInUrl(): string {
 
 export type ApiResult = { ok: boolean; error?: { code?: string; message?: string }; [key: string]: unknown };
 
+/*
+ * Where a plugin's routes live. Installed from the EmDash registry, a plugin does not keep its
+ * name in the address: EmDash gives it the id "r_" + the first 16 base32 characters of
+ * SHA-256(publisher DID + "\n" + slug) (emdash/src/registry/plugin-id.ts). Installed from local
+ * files (a lab, a trusted install), it keeps its name. The kit cannot know which, so it tries the
+ * registry id, falls back to the name when EmDash says the route does not exist, and remembers
+ * the answer for the visit.
+ */
+export const PUBLISHER_DID = "did:plc:2o6axbe264shvyedyhycyhya";
+const BASE32 = "abcdefghijklmnopqrstuvwxyz234567";
+
+/** The id EmDash gives this plugin when it is installed from the registry. Same on every site. */
+export async function registryPluginId(slug: string, did = PUBLISHER_DID): Promise<string> {
+	const hash = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`${did}\n${slug}`)));
+	let bits = 0;
+	let value = 0;
+	let out = "";
+	for (const byte of hash) {
+		value = (value << 8) | byte;
+		bits += 8;
+		while (bits >= 5) {
+			bits -= 5;
+			out += BASE32[(value >>> bits) & 31];
+		}
+	}
+	return `r_${out.slice(0, 16)}`;
+}
+
+const chosen = new Map<string, string>();
+
+function remembered(plugin: string): string | null {
+	try {
+		return typeof sessionStorage === "undefined" ? null : sessionStorage.getItem(`wb-plugin-id:${plugin}`);
+	} catch {
+		return null;
+	}
+}
+
+/**
+ * fetch() for a plugin route, at whichever address this site installed the plugin under.
+ * `origin` is for server-side calls from an Astro page (pass Astro.url.origin).
+ */
+export async function pluginFetch(plugin: string, path: string, init: RequestInit = {}, origin = ""): Promise<Response> {
+	const known = chosen.get(plugin) ?? remembered(plugin);
+	const ids = known ? [known] : [await registryPluginId(plugin), plugin];
+	let response: Response | null = null;
+	for (const [index, id] of ids.entries()) {
+		response = await fetch(`${origin}/_emdash/api/plugins/${id}/${path}`, init);
+		const last = index === ids.length - 1;
+		if (!last && response.status === 404) {
+			const body = await response.clone().json().catch(() => null);
+			// Only EmDash's own "no such plugin route" moves on; a plugin's own answer is kept.
+			if (/route not found/i.test(String(body?.error?.message ?? ""))) continue;
+		}
+		chosen.set(plugin, id);
+		try {
+			if (typeof sessionStorage !== "undefined") sessionStorage.setItem(`wb-plugin-id:${plugin}`, id);
+		} catch {
+			// Storage can be blocked. The answer is still kept for this page.
+		}
+		return response;
+	}
+	return response as Response;
+}
+
 /** Call a plugin route. Member routes answer SIGN_IN_REQUIRED for guests. */
 export async function api(plugin: string, path: string, body?: unknown, method = body ? "POST" : "GET"): Promise<ApiResult> {
 	try {
-		const response = await fetch(`/_emdash/api/plugins/${plugin}/${path}`, {
+		const response = await pluginFetch(plugin, path, {
 			method,
 			credentials: "same-origin",
 			headers: { "Content-Type": "application/json", "X-EmDash-Request": "1" },
