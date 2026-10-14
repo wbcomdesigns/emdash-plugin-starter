@@ -12,3 +12,5 @@ node_modules
 !model-site/snapshot/data.db
 model-site/snapshot/data.db-wal
 model-site/snapshot/data.db-shm
+model-site/.snapshot-work.*
+model-site/.snapshot-old
