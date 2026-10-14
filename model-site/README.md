@@ -2,6 +2,10 @@
 
 The same realistic content and plugin data as the Fieldnote showcase (port 4350), for any plugin lab. Agents build features and take screenshots against this data, so every plugin is judged on one believable site: a notes app company with 8 posts, an About page with a poll, 10 partner listings with photos and 2 waiting, 10 roadmap items with 231 votes, 3 releases, 8 help articles, 4 FAQs, reviews with an owner reply, and the site named Fieldnote with admin Maya Lin.
 
+## Where the data lives
+
+The snapshot database (`model-site/snapshot/data.db`) stays on this machine and is never committed: a cleaned copy of a real site database cannot be proven free of every trace, so it is not distributed. The photos in `snapshot/uploads/` are committed (stock images). Agents run on this machine and load the local file. On another machine, ask the owner agent to take a snapshot there first.
+
 ## Use it (agents)
 
 1. Build your plugin's standard lab: `scripts/setup-lab.sh` in the plugin repo (blog template).
