@@ -1,4 +1,4 @@
-/* wbcom-shared: 3 */
+/* wbcom-shared: 4 */
 /* Browser helpers shared by every Wbcom EmDash plugin kit. Keep this file identical across plugins.
    Same rules as styles/wbcom-base.css: only ever add, and raise the number on the first line. */
 
@@ -53,28 +53,45 @@ function remembered(plugin: string): string | null {
 	}
 }
 
+/** EmDash's own answer for an address with no plugin behind it (not a plugin's answer). */
+async function routeMissing(response: Response): Promise<boolean> {
+	if (response.status !== 404) return false;
+	const body = await response.clone().json().catch(() => null);
+	return /route not found/i.test(String(body?.error?.message ?? ""));
+}
+
+function remember(plugin: string, id: string | null): void {
+	if (id) chosen.set(plugin, id);
+	else chosen.delete(plugin);
+	try {
+		if (typeof sessionStorage === "undefined") return;
+		if (id) sessionStorage.setItem(`wb-plugin-id:${plugin}`, id);
+		else sessionStorage.removeItem(`wb-plugin-id:${plugin}`);
+	} catch {
+		// Storage can be blocked. Nothing is lost but one extra request.
+	}
+}
+
 /**
  * fetch() for a plugin route, at whichever address this site installed the plugin under.
  * `origin` is for server-side calls from an Astro page (pass Astro.url.origin).
+ *
+ * Only an address the plugin itself answered on is remembered. On the server this memory is
+ * shared by every visitor, so a failure (the plugin switched off, a deploy in progress) must
+ * never be remembered, and a remembered address that stops answering is forgotten.
  */
 export async function pluginFetch(plugin: string, path: string, init: RequestInit = {}, origin = ""): Promise<Response> {
 	const known = chosen.get(plugin) ?? remembered(plugin);
-	const ids = known ? [known] : [await registryPluginId(plugin), plugin];
+	if (known) {
+		const response = await fetch(`${origin}/_emdash/api/plugins/${known}/${path}`, init);
+		if (!(await routeMissing(response))) return response;
+		remember(plugin, null);
+	}
 	let response: Response | null = null;
-	for (const [index, id] of ids.entries()) {
+	for (const id of [await registryPluginId(plugin), plugin]) {
 		response = await fetch(`${origin}/_emdash/api/plugins/${id}/${path}`, init);
-		const last = index === ids.length - 1;
-		if (!last && response.status === 404) {
-			const body = await response.clone().json().catch(() => null);
-			// Only EmDash's own "no such plugin route" moves on; a plugin's own answer is kept.
-			if (/route not found/i.test(String(body?.error?.message ?? ""))) continue;
-		}
-		chosen.set(plugin, id);
-		try {
-			if (typeof sessionStorage !== "undefined") sessionStorage.setItem(`wb-plugin-id:${plugin}`, id);
-		} catch {
-			// Storage can be blocked. The answer is still kept for this page.
-		}
+		if (await routeMissing(response)) continue;
+		remember(plugin, id);
 		return response;
 	}
 	return response as Response;
