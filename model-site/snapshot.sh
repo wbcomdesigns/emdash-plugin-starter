@@ -11,5 +11,7 @@ cp -R "$SITE/uploads" "$HERE/snapshot/uploads"
 for t in $(sqlite3 "$HERE/snapshot/data.db" ".tables" | tr ' ' '\n' | grep -iE 'sess|auth_|_auth|cred|token|oauth|challenge|secret|authorization'); do
 	sqlite3 "$HERE/snapshot/data.db" "DELETE FROM $t;"
 done
-sqlite3 "$HERE/snapshot/data.db" "VACUUM;"
+# One self-contained file: fold the write-ahead log in and switch it off, so data.db alone is complete.
+sqlite3 "$HERE/snapshot/data.db" "PRAGMA wal_checkpoint(TRUNCATE); PRAGMA journal_mode=DELETE; VACUUM;" >/dev/null
+rm -f "$HERE/snapshot/data.db-wal" "$HERE/snapshot/data.db-shm"
 echo "Snapshot taken: $(du -sh "$HERE/snapshot" | cut -f1)"
