@@ -28,7 +28,7 @@ Run the checklist from each starting point. The same plugin can pass one and fai
 | E3 | Existing site, older EmDash | A site still on 1.2, updated during the walk | Update order and version notes |
 | E4 | Existing site with another Wbcom plugin | Any site above with one Wbcom plugin already wired | Shared kit files (`wbcom-kit.ts`, `wbcom-base.css`), `/account/` pages, menu links |
 
-Write down the EmDash version shown at the foot of the admin sidebar for every run. On 2026-10-18 a fresh site gets **EmDash 1.3.0**, and every guide still says "tested on 1.2".
+Write down the EmDash version shown at the foot of the admin sidebar for every run. On 2026-10-18 a fresh site got **EmDash 1.3.0**; from 2026-10-18 19:19 UTC it gets **1.3.1**, and every guide still says "tested on 1.2".
 
 ## Part 0. Is the site ready for a registry plugin?
 

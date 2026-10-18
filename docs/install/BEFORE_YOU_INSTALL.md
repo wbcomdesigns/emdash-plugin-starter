@@ -19,7 +19,7 @@ Stop the dev server and start it again. **Registry** now shows in the admin menu
 
 **3. You need Node 22.16 or later** for the `npx emdash seed` step.
 
-Checked on EmDash 1.3.0 with the `blog` template on Node. The Cloudflare lines follow EmDash's own guide; we have not run them on a Cloudflare site yet.
+Checked on EmDash 1.3.1 with the `blog` template on Node. The Cloudflare lines follow EmDash's own guide; we have not run them on a Cloudflare site yet.
 
 ## Install
 
@@ -27,14 +27,21 @@ Checked on EmDash 1.3.0 with the `blog` template on Node. The Cloudflare lines f
 2. From your site's root folder, get the kit for the version you just installed and copy it in:
 
    ```bash
-   kit="$(mktemp -d)" && git clone --branch <tag> --depth 1 https://github.com/wbcomdesigns/<repo> "$kit/<repo>" && "$kit/<repo>/scripts/add-to-site.sh" .
+   kit="$(mktemp -d)" &&
+     git clone --branch <tag> --depth 1 https://github.com/wbcomdesigns/<repo> "$kit/<repo>" &&
+     "$kit/<repo>/scripts/add-to-site.sh" .
    ```
 
    (`mktemp -d` makes a fresh folder only you can write to, and `&&` runs the script only when the clone worked. Never clone into a fixed `/tmp/<name>`: on a shared machine someone else can create it first.)
 
-   The script copies the kit, never replaces a newer shared file another Wbcom plugin already copied, keeps a backup of any wording file you changed, creates the content types the plugin needs (if any), and prints the exact lines to paste into your templates, with the file names.
+   The script copies the kit, never replaces a newer shared file another Wbcom plugin already copied, keeps a backup of the wording file only when you changed it yourself, creates the content types the plugin needs (if any), and prints the exact lines to paste into your templates, with the file names.
 3. Paste the lines it printed. Restart the dev server.
 4. Add the menu links it printed in Admin, Menus.
 5. Open the plugin in the admin and follow its first screen.
 
 After every plugin update, run step 2 again with the new tag.
+
+## Rules for the command and the script (for plugin builders)
+
+- **Show the command on three lines,** exactly as above, everywhere: the admin card, both install pages, the kit README and the script's own output. An admin `code` block does not wrap or scroll, so a one-line command is cut off on every screen width.
+- **Wording backup only when the owner edited it.** The kit ships `site-kit/lib/<plugin>-strings.sums`: one SHA-256 per line, of the strings file of every released version, newest last (add the new one at each release). The script backs up the site's strings file only when its hash is not in that list. An untouched file from any older release is replaced without a word.
