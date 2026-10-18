@@ -37,7 +37,7 @@ Checked on EmDash 1.3.1 with the `blog` template on Node. The Cloudflare lines f
 
    (`mktemp -d` makes a fresh folder only you can write to, and `&&` runs the script only when the clone worked. Never clone into a fixed `/tmp/<name>`: on a shared machine someone else can create it first.)
 
-   The script copies the kit, never replaces a newer shared file another Wbcom plugin already copied, keeps a backup of the wording file only when you changed it yourself, creates the content types the plugin needs (if any), and prints the exact lines to paste into your templates, with the file names.
+   The script copies the kit, never replaces a newer shared file another Wbcom plugin already copied, keeps a backup of any kit file you changed yourself (and lists it), creates the content types the plugin needs (if any), and prints the exact lines to paste into your templates, with the file names.
 3. Paste the lines it printed. Restart the dev server.
 4. Add the menu links it printed in Admin, Menus.
 5. Open the plugin in the admin and follow its first screen.
@@ -47,7 +47,7 @@ After every plugin update, run step 2 again with the new tag.
 ## Rules for the command and the script (for plugin builders)
 
 - **Show the command exactly as above, on six lines, every line 52 characters or fewer,** everywhere: the admin card, both install pages, the kit README and the script's own output. An admin `code` block does not wrap or scroll, so a longer line is cut off. 52 characters fit the code box at 768 and wider. At 390 the box is about 40 characters wide and the address line is still cut, so the card also links the install guide right under the command ("Copy it from the install guide on a phone"), where it wraps.
-- **Wording backup only when the owner edited it.** The kit ships `site-kit/lib/<plugin>-strings.sums`: one SHA-256 per line, of the strings file of every released version, newest last (add the new one at each release). The script backs up the site's strings file only when its hash is not in that list. An untouched file from any older release is replaced without a word.
+- **Back up only what the owner edited:** see the `kit.sums` rule below. It replaces the earlier strings-only `<plugin>-strings.sums` list.
 - **Say when a shared file was upgraded.** When the script replaces an older `wbcom-kit.ts` or `wbcom-base.css` that another Wbcom plugin copied, it prints one line saying so (old and new `wbcom-shared` numbers), as it does when it keeps a newer one.
 - **Engine and kit can be one version apart.** A site updates the plugin in the admin and copies the kit later, or the other way round. The kit must handle every error code the previous engine release returns and the new one returns, and must treat a missing field from an older engine (for example `guestWrites`) the safe way. A guest never sees "Something went wrong" for a known refusal: a "guest cannot write here" code from either version shows the sign-in wording. The registry changelog of every release says "Copy the kit again after you update", with the command.
 
