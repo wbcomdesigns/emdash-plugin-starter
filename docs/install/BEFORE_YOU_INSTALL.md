@@ -51,6 +51,9 @@ After every plugin update, run step 2 again with the new tag.
 - **Say when a shared file was upgraded.** When the script replaces an older `wbcom-kit.ts` or `wbcom-base.css` that another Wbcom plugin copied, it prints one line saying so (old and new `wbcom-shared` numbers), as it does when it keeps a newer one.
 - **Engine and kit can be one version apart.** A site updates the plugin in the admin and copies the kit later, or the other way round. The kit must handle every error code the previous engine release returns and the new one returns, and must treat a missing field from an older engine (for example `guestWrites`) the safe way. A guest never sees "Something went wrong" for a known refusal: a "guest cannot write here" code from either version shows the sign-in wording. The registry changelog of every release says "Copy the kit again after you update", with the command.
 
+- **Every kit file the owner may edit is protected the same way.** Ship `site-kit/kit.sums`: `<sha256>  <path>` for every file the script copies, at every released tag plus the new one. Before replacing a site file, the script backs it up (`.bak-YYYYMMDD`, a time suffix on a second run the same day) when its hash is not a released hash for that path, and says which files it backed up. Untouched files from any release are replaced without a word. This covers components, styles and pages, not only the wording file.
+- **A new kit keeps sending what the previous engine needs.** If the previous engine keyed guests by a browser token or field, the new kit still sends it (the new engine ignores it), so an older engine never falls back to one shared or one random identity per request.
+
 ## Guests and hosting (shared text for every plugin with guest writes)
 
 Copy this into the plugin's guest section, filled in.
