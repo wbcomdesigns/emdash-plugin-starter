@@ -27,9 +27,10 @@ Checked on EmDash 1.3.0 with the `blog` template, Node and Cloudflare.
 2. From your site's root folder, get the kit for the version you just installed and copy it in:
 
    ```bash
-   git clone --branch <tag> --depth 1 https://github.com/wbcomdesigns/<repo> /tmp/<repo>
-   /tmp/<repo>/scripts/add-to-site.sh .
+   kit="$(mktemp -d)" && git clone --branch <tag> --depth 1 https://github.com/wbcomdesigns/<repo> "$kit/<repo>" && "$kit/<repo>/scripts/add-to-site.sh" .
    ```
+
+   (`mktemp -d` makes a fresh folder only you can write to, and `&&` runs the script only when the clone worked. Never clone into a fixed `/tmp/<name>`: on a shared machine someone else can create it first.)
 
    The script copies the kit, never replaces a newer shared file another Wbcom plugin already copied, keeps a backup of any wording file you changed, creates the content types the plugin needs (if any), and prints the exact lines to paste into your templates, with the file names.
 3. Paste the lines it printed. Restart the dev server.
