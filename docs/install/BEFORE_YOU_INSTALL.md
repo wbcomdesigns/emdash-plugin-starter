@@ -28,7 +28,10 @@ Checked on EmDash 1.3.1 with the `blog` template on Node. The Cloudflare lines f
 
    ```bash
    kit="$(mktemp -d)" &&
-     git clone --branch <tag> --depth 1 https://github.com/wbcomdesigns/<repo> "$kit/<repo>" &&
+     git clone --depth 1 \
+       --branch <tag> \
+       https://github.com/wbcomdesigns/<repo> \
+       "$kit/<repo>" &&
      "$kit/<repo>/scripts/add-to-site.sh" .
    ```
 
@@ -43,7 +46,7 @@ After every plugin update, run step 2 again with the new tag.
 
 ## Rules for the command and the script (for plugin builders)
 
-- **Show the command on three lines,** exactly as above, everywhere: the admin card, both install pages, the kit README and the script's own output. An admin `code` block does not wrap or scroll, so a one-line command is cut off on every screen width.
+- **Show the command exactly as above, on six lines, every line 52 characters or fewer,** everywhere: the admin card, both install pages, the kit README and the script's own output. An admin `code` block does not wrap or scroll, so a longer line is cut off. 52 characters fit the code box at 768 and wider. At 390 the box is about 40 characters wide and the address line is still cut, so the card also links the install guide right under the command ("Copy it from the install guide on a phone"), where it wraps.
 - **Wording backup only when the owner edited it.** The kit ships `site-kit/lib/<plugin>-strings.sums`: one SHA-256 per line, of the strings file of every released version, newest last (add the new one at each release). The script backs up the site's strings file only when its hash is not in that list. An untouched file from any older release is replaced without a word.
 - **Say when a shared file was upgraded.** When the script replaces an older `wbcom-kit.ts` or `wbcom-base.css` that another Wbcom plugin copied, it prints one line saying so (old and new `wbcom-shared` numbers), as it does when it keeps a newer one.
 - **Engine and kit can be one version apart.** A site updates the plugin in the admin and copies the kit later, or the other way round. The kit must handle every error code the previous engine release returns and the new one returns, and must treat a missing field from an older engine (for example `guestWrites`) the safe way. A guest never sees "Something went wrong" for a known refusal: a "guest cannot write here" code from either version shows the sign-in wording. The registry changelog of every release says "Copy the kit again after you update", with the command.
