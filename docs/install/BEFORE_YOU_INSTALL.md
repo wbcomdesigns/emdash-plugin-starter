@@ -11,15 +11,15 @@ Fill in `<Plugin>`, `<slug>`, `<repo>` and `<tag>` for each plugin. `<tag>` is t
 **1. Your site needs a sandbox runner.** Registry plugins run in a sandbox. Until the site has one, Admin, Plugins shows "No plugins configured" and there is no Registry in the menu.
 
 - **Node:** in your site, run `npm install @emdash-cms/sandbox-workerd workerd`, then add `sandboxRunner: "@emdash-cms/sandbox-workerd/sandbox",` inside `emdash({ ... })` in `astro.config.mjs`.
-- **Cloudflare:** add `import { sandbox } from "@emdash-cms/cloudflare";` and `sandboxRunner: sandbox(),`. It needs the Workers Paid plan and a `worker_loaders` binding named `LOADER` in your Wrangler config. The EmDash Cloudflare templates ship that binding commented out. EmDash's guide: https://docs.emdashcms.com/deployment/plugin-sandbox/#cloudflare-workers
+- **Cloudflare:** add `import { sandbox } from "@emdash-cms/cloudflare";` and `sandboxRunner: sandbox(),`. It needs the Workers Paid plan, a `worker_loaders` binding named `LOADER` in your Wrangler config (the EmDash Cloudflare templates ship it commented out: uncomment it), and an R2 bucket set as `storage: r2(...)`. A registry install stores the plugin in that bucket; without it the install stops with "Storage error while installing plugin". R2 must be turned on for the Cloudflare account first. EmDash's guide: https://docs.emdashcms.com/deployment/plugin-sandbox/#cloudflare-workers
 
-Stop the dev server and start it again. **Registry** now shows in the admin menu.
+On Node, stop the dev server and start it again. On Cloudflare there is no dev server: run `npm run deploy`, and the change is live when the deploy finishes. **Registry** now shows in the admin menu.
 
 **2. The plugin is the engine. Visitor pages come from its site kit.** A registry plugin cannot add pages to your site. Until you copy the kit, its addresses (for example `/<slug>/`) show your site's 404 page. That is expected. The kit copy below takes one command.
 
 **3. You need Node 22.16 or later** for the `npx emdash seed` step.
 
-Checked on EmDash 1.3.1 with the `blog` template on Node. The Cloudflare lines follow EmDash's own guide; we have not run them on a Cloudflare site yet.
+Checked on EmDash 1.3.1 with the `blog` template on Node. On Cloudflare Workers the sandbox runner, the Registry menu and the R2 requirement are checked; the plugin installs there are still being checked.
 
 ## Install
 
