@@ -23,7 +23,7 @@ A copy of a real site database is not distributed: it cannot be proven free of e
 2. Load the model data into it:
 
    ```bash
-   bash ~/code/emdash-plugin-starter/model-site/load-into-lab.sh <your-lab-folder>
+   bash <path-to-this-repo>/model-site/load-into-lab.sh <your-lab-folder>
    ```
 
 3. Start the lab again: `scripts/restart-lab.sh` (with `PLUGIN_LAB=<your-lab-folder>` if you used a custom folder).
@@ -35,7 +35,7 @@ To start over, run the loader again: it replaces the lab's database with the sna
 
 ## Never
 
-- Never sign in to, change, or reset the showcase itself (`~/code/emdash-showcase`, port 4350). Its sign-in shortcut resets the menu and footer.
+- Never sign in to, change, or reset the showcase itself (the Fieldnote showcase site). Its sign-in shortcut resets the menu and footer.
 - Never commit lab data back here. Only the owner agent refreshes the snapshot.
 
 ## Refresh the snapshot (owner agent only)
