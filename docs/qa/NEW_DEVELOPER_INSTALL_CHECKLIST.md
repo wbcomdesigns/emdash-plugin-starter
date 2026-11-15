@@ -13,7 +13,7 @@ Started 2026-10-18, after a report that on a fresh EmDash setup "all the plugins
 3. **Note each place you stopped to think.** Did you guess a file name, look up a path, or read the source? Each one is a finding.
 4. **Never fix the site to keep going without writing it down.** Write the finding, then apply the smallest fix and carry on, so one gap does not hide the next.
 5. **One GitHub issue per finding** on that plugin's repo, labelled `install-path`, under the next version milestone. A gap shared by every plugin goes on `emdash-plugin-starter`.
-6. **Screenshots** go to `~/work-artifacts/screenshots/YYYY-MM/`. Open each one and judge it as the owner or visitor would.
+6. **Screenshots** go to a scratch folder outside the repo. Open each one and judge it as the owner or visitor would.
 
 ## Starting points
 
@@ -146,4 +146,4 @@ Run on E4 with all five wired, at the live versions.
 | Date | Starting point | EmDash | Plugins and tags | Result |
 | --- | --- | --- | --- | --- |
 | 2026-10-18 | F1 | 1.3.0 | All five installed from the registry. WB Polls v0.3.0 kit walked. | Engines and admin screens fine. Part 0 fails (no Registry without a runner, no steps for it). Step 1.4 fails for all five (plain 404 before the kit is copied). P2, R2, M3 and the other findings above are open. Other kits not yet walked. |
-| 2026-10-18 | F1 | 1.3.0 (d10d7ae1b) | Listora v0.6.1, WB Reviews v0.2.0, WB Polls v0.3.0, Product Roadmap v0.2.1, KnowX v0.1.4. Site: `~/code/nd-f1` on port 4371. | Part 0 fails until `@emdash-cms/sandbox-workerd` is installed and the dev process is started again (a config reload is not enough). Step 1.4 is a plain 404 for every kit URL. Listora's setup command works and `/listings/` renders. Pasted `$K=path/to/...` commands fail. Roadmap without `layouts/` returns 500. Reviews `../components` import returns 500 on the blog post. KnowX `/docs/` renders after the tag is checked out by hand. Guest 401 on Reviews `/mine` and Roadmap `/votes`. Issues filed. F2, E1, E2, E3, E4 and the guest/member/admin jobs are not walked yet. |
+| 2026-10-18 | F1 | 1.3.0 (d10d7ae1b) | Listora v0.6.1, WB Reviews v0.2.0, WB Polls v0.3.0, Product Roadmap v0.2.1, KnowX v0.1.4. Site: a fresh blog-template EmDash site. | Part 0 fails until `@emdash-cms/sandbox-workerd` is installed and the dev process is started again (a config reload is not enough). Step 1.4 is a plain 404 for every kit URL. Listora's setup command works and `/listings/` renders. Pasted `$K=path/to/...` commands fail. Roadmap without `layouts/` returns 500. Reviews `../components` import returns 500 on the blog post. KnowX `/docs/` renders after the tag is checked out by hand. Guest 401 on Reviews `/mine` and Roadmap `/votes`. Issues filed. F2, E1, E2, E3, E4 and the guest/member/admin jobs are not walked yet. |

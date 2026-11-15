@@ -31,7 +31,7 @@ Each plugin repo carries everything an agent needs, with no shared conversation:
 ## How to assign the work
 
 - **One agent per plugin.** The repos, lab sites and ports are separate, so the five can run at the same time on one machine.
-- Tell the agent one thing: "Read `ops/handoff.md` in `~/code/emdash-<slug>` and work the cards in order."
+- Tell the agent one thing: "Read `ops/handoff.md` in the plugin repo `emdash-<slug>` and work the cards in order."
 - An agent stops at a passing gate. It never publishes. A registry release cannot be changed.
 - **Test on the standard site (owner, 2026-10-14).** A fresh `npm create emdash@latest` blog site, the plugin installed from the registry, the kit copied from the release tag by its own install guide. See the `emdash-plugin-development` skill, section 6.
 - **Any mix, any version (owner, 2026-10-14).** A site may run one of these plugins, any mix, or all of them, each updated at its own pace. Every decision is checked against all of those cases: a plugin works alone, never depends on another, and never changes how another looks. The two shared files carry a number on their first line (`wbcom-shared: N`); they only ever gain rules, and a kit never replaces a newer copy with an older one (`scripts/apply-kit.sh` compares the numbers, and each install guide copies them with the same check, as in `emdash-polls/site-kit/README.md`; the release gate fails a plain `cp`). A look that belongs to one plugin lives in its own stylesheet under its own prefix. Names the site owner sees are prefixed too ("Roadmap categories", "Help categories"), so two plugins never show the same label.
@@ -66,7 +66,7 @@ Each plugin repo carries everything an agent needs, with no shared conversation:
 
 ## Brand kits
 
-Logos are never drawn in a plugin repo. They come from the brand pipeline in `~/Documents/brand logos/_render-src/`, which builds the whole set from one mark definition: `build_kit.py` for the WB plugin family (separate gradient shapes, no tile), `build_web_kit.py` for site brands (tile marks), `build_social.py` / `build_web_social.py` for banners, `preview_sheet.py` for the contact sheet, `update_brand_md.py` for the brand sheet. A plugin repo carries only `icon.png` (256, from the kit's mark) and `images/banner.png` (the no-tagline lockup on white).
+Logos are never drawn in a plugin repo. They come from the Wbcom brand kit pipeline, which builds the whole set from one mark definition: `build_kit.py` for the WB plugin family (separate gradient shapes, no tile), `build_web_kit.py` for site brands (tile marks), `build_social.py` / `build_web_social.py` for banners, `preview_sheet.py` for the contact sheet, `update_brand_md.py` for the brand sheet. A plugin repo carries only `icon.png` (256, from the kit's mark) and `images/banner.png` (the no-tagline lockup on white).
 
 Kits built on 2026-10-13: KnowX, WB Polls, Product Roadmap, WB Reviews, WB Maintenance Mode.
 
@@ -79,12 +79,13 @@ Kits built on 2026-10-13: KnowX, WB Polls, Product Roadmap, WB Reviews, WB Maint
 
 ## Making a new plugin from this starter
 
-1. Copy this folder to `~/code/emdash-<slug>`, without `node_modules` and `.git`.
-2. Set `name` and `lab.port` in `package.json`, and `slug`, `name`, `description`, `keywords`, `repo` in `emdash-plugin.jsonc`.
-3. Write `SCOPE.md` before any code, and settle its open questions with the owner one at a time: how each kind of site owner uses it, purpose, in scope, out of scope, schema, routes, settings, admin screens, kit files, screens and their states, risks. Record each answer in its decisions table.
-4. Write `PLAN.md`: the cards in order, what is parked, what must be proven before a live site.
-5. Write `docs/qa/QA_CHECKLIST.md` from the scope: guest, member, admin and presentation cases.
-6. File the cards as GitHub issues, each with Build, UX ready when, Function ready when and QA cases.
-7. `npm install --legacy-peer-deps && npm test`, then `./scripts/setup-lab.sh`.
+1. Copy this folder to a new folder named `emdash-<slug>`, without `node_modules` and `.git`.
+2. Replace `README.md` with a product landing page modelled on the [Learnomy README](https://github.com/wbcomdesigns/emdash-learnomy/blob/main/README.md) before the first public push: banner, one-line promise, registry install link, screenshots, who it is for, what you get, how to get started and honest limits. The release gate blocks the release until the README is a landing page. Move build and lab notes to `CONTRIBUTING.md`.
+3. Set `name` and `lab.port` in `package.json`, and `slug`, `name`, `description`, `keywords`, `repo` in `emdash-plugin.jsonc`.
+4. Write `SCOPE.md` before any code, and settle its open questions with the owner one at a time: how each kind of site owner uses it, purpose, in scope, out of scope, schema, routes, settings, admin screens, kit files, screens and their states, risks. Record each answer in its decisions table.
+5. Write `PLAN.md`: the cards in order, what is parked, what must be proven before a live site.
+6. Write `docs/qa/QA_CHECKLIST.md` from the scope: guest, member, admin and presentation cases.
+7. File the cards as GitHub issues, each with Build, UX ready when, Function ready when and QA cases.
+8. `npm install --legacy-peer-deps && npm test`, then `./scripts/setup-lab.sh`.
 
 The full process, including what went wrong on the first release, is in the `emdash-plugin-development` skill (`references/build-check-publish.md`). Load that skill before any work here.
